@@ -1,0 +1,39 @@
+{
+  "name": "sveltekit-template",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jldec/sveltekit-template"
+  },
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "npm run test:integration && npm run test:unit",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "test:integration": "playwright test",
+    "test:unit": "vitest"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.39.0",
+    "@sveltejs/adapter-static": "^2.0.3",
+    "@sveltejs/kit": "^1.27.4",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.24",
+    "postcss-load-config": "^4.0.1",
+    "svelte": "^4.2.2",
+    "svelte-check": "^3.5.2",
+    "tailwindcss": "^3.3.5",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vitest": "^0.34.6"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module"
+}
