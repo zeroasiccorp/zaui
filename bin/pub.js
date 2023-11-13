@@ -52,7 +52,7 @@ const buildDir = path.resolve(
 const assetDir = path.resolve(
   buildDir,
   process.env.PUB_ASSET_DIR ? path.resolve(projectDir, process.env.PUB_ASSET_DIR) : ''
-  );
+);
 
 // Similar to project-root/.vitepress directory but only for optional override files.
 // defaults to .pub under projectDir
@@ -82,8 +82,8 @@ const env = {
 };
 
 console.log(pkg.name, pkg.version, {
-  vitePath: viteFile,
-  args,
+  viteFile,
+  viteCommand,
   packageDir,
   env,
 });
