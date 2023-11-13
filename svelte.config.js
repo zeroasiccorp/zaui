@@ -3,11 +3,15 @@ import { vitePreprocess } from "@sveltejs/kit/vite";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  preprocess: [vitePreprocess({})],
+  preprocess: [vitePreprocess()],
 
   kit: {
+    outDir: process.env.PUB_OUT_DIR,
     // https://kit.svelte.dev/docs/adapter-static
     adapter: adapter({
+      pages: process.env.PUB_BUILD_DIR,
+      assets: process.env.PUB_ASSET_DIR,
+      // https://kit.svelte.dev/docs/adapter-static#options-fallback
       fallback: "404.html",
       precompress: false,
       strict: true,
