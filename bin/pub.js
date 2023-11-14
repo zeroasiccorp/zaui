@@ -13,7 +13,22 @@ import url from 'node:url';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-const viteFile = path.resolve(__dirname, '..', 'node_modules', '.bin', 'vite');
+let binDir = path.resolve(__dirname, '..', 'node_modules', '.bin');
+let viteFile = path.resolve(binDir, 'vite');
+
+if (!fs.existsSync(viteFile)) {
+  // Try npm 7+ layout
+  let binDir2 = path.resolve(__dirname, '..', '..', '.bin');
+  viteFile = path.resolve(binDir2, 'vite');
+  if (!fs.existsSync(viteFile)) {
+    console.error(`Could not find vite executable in ${binDir} or ${binDir2}`);
+    process.exit(1);
+  }
+  else {
+    binDir = binDir2;
+  }
+}
+
 const viteCommand = process.argv[2];
 const packageDir = path.resolve(__dirname, '..');
 const pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8'));
