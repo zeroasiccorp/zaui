@@ -1,18 +1,30 @@
-import typography from '@tailwindcss/typography';
-import mergeConfig from './mergeConfig';
-
 // https://tailwindcss.com/docs/guides/sveltekit
 // https://tailwindcss.com/docs/typography-plugin
+let merge = require('ts-deepmerge');
+let path = require('path');
+let fs = require('fs');
 
-/** @type {import('tailwindcss').Config}*/
+let content = ['./src/**/*.{html,js,svelte,ts}'];
+
+/** @type {import('tailwindcss').Config} */
 let config = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content,
   theme: {
     extend: {},
   },
-  plugins: [typography],
-};
+  plugins: [require('@tailwindcss/typography')],
+}
 
-config = mergeConfig(config, process.env.PUB_TAILWIND_CONFIG);
+let srcDir = process.env.PUB_SRC_DIR;
 
-export default config;
+if (srcDir) {
+  content.push(path.join(srcDir, '**/*.{html,js,svelte,ts}'))
+
+  const configFile = path.join(srcDir, 'tailwind.config.js');
+  if (fs.existsSync(configFile)) {
+    let userConfig = require(configFile);
+    config = { ...merge(config, userConfig), content };
+  }
+}
+
+module.exports = config;

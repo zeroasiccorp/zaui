@@ -1,31 +1,34 @@
-import adapter from "@sveltejs/adapter-static";
-import { vitePreprocess } from "@sveltejs/kit/vite";
+import adapter from '@sveltejs/adapter-static';
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   preprocess: [vitePreprocess()],
 
   kit: {
-    outDir: process.env.PUB_OUT_DIR,
-    // https://kit.svelte.dev/docs/adapter-static
+    alias: {
+    },
     adapter: adapter({
       pages: process.env.PUB_BUILD_DIR,
-      assets: process.env.PUB_ASSET_DIR,
       // https://kit.svelte.dev/docs/adapter-static#options-fallback
-      fallback: "404.html",
+      fallback: '404.html',
       precompress: false,
       strict: true,
     }),
     prerender: {
       crawl: true,
-      entries: ["*"],
+      entries: ['*'],
       handleHttpError: ({ status, message }) => {
         if (status !== 404) throw new Error(message);
         console.log(message);
       },
-      handleMissingId: "warn",
+      handleMissingId: 'warn',
     },
   },
 };
+
+if (process.env.PUB_SRC_DIR) {
+  config.kit.alias['src'] = process.env.PUB_SRC_DIR;
+}
 
 export default config;

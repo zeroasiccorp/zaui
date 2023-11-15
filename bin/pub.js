@@ -23,8 +23,7 @@ if (!fs.existsSync(viteFile)) {
   if (!fs.existsSync(viteFile)) {
     console.error(`Could not find vite executable in ${binDir} or ${binDir2}`);
     process.exit(1);
-  }
-  else {
+  } else {
     binDir = binDir2;
   }
 }
@@ -38,19 +37,10 @@ const pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'u
 // override with cli arg or PUB_PROJECT_DIR
 const projectDir = path.resolve('.', process.argv[3] ?? process.env.PUB_PROJECT_DIR ?? '');
 
-// https://kit.svelte.dev/docs/configuration#outdir
-// defaults to .svelte-kit under node_modules/packageDir
-// override with PUB_OUT_DIR, resolved relative to projectDir
-const outDir = path.resolve(
-  packageDir,
-  '.svelte-kit',
-  process.env.PUB_OUT_DIR ? path.resolve(projectDir, process.env.PUB_OUT_DIR) : ''
-);
-
 // https://vitepress.dev/guide/routing#source-directory
 // defaults to projectDir
-// override with PUB_SOURCE_DIR, resolved relative to projectDir
-const sourceDir = path.resolve(projectDir, process.env.PUB_SOURCE_DIR ?? '');
+// override with PUB_CONTENT_DIR, resolved relative to projectDir
+const contentDir = path.resolve(projectDir, process.env.PUB_CONTENT_DIR ?? '');
 
 // https://kit.svelte.dev/docs/adapter-static#options-pages
 // defaults to projectDir/build
@@ -61,39 +51,19 @@ const buildDir = path.resolve(
   process.env.PUB_BUILD_DIR ? path.resolve(projectDir, process.env.PUB_BUILD_DIR) : ''
 );
 
-// https://kit.svelte.dev/docs/adapter-static#options-pages
-// defaults to projectDir/build
-// override with PUB_ASSET_DIR, resolved relative to projectDir
-const assetDir = path.resolve(
-  buildDir,
-  process.env.PUB_ASSET_DIR ? path.resolve(projectDir, process.env.PUB_ASSET_DIR) : ''
-);
-
-// Similar to project-root/.vitepress directory but only for optional override files.
-// defaults to .pub under projectDir
-// override with PUB_CONFIG_DIR, resolved relative to projectDir
-// The following override files are supported:
-// - svelte.config.js
-// - tailwind.config.js
-// - vite.config.ts
-const configDir = path.resolve(projectDir, process.env.PUB_CONFIG_DIR ?? '.pub');
-
-function configExists(foo) {
-  const configPath = path.join(configDir, foo);
-  return fs.existsSync(configPath) ? configPath : undefined;
-}
+// Similar to project-root/.vitepress directory
+// Used for optional tailwind.config.js and SvelteKit component src tree.
+// defaults to projectDir/src
+// override with PUB_SRC_DIR, resolved relative to projectDir
+// NOTE: tailwind.config.js must be cjs (not esm) for non-async merge.
+const srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
 
 // All directory paths should be fully resolved
-// Paths to optional config files should either be fully resolved or undefined
 const env = {
   PUB_PROJECT_DIR: projectDir,
-  PUB_OUT_DIR: outDir,
-  PUB_SOURCE_DIR: sourceDir,
+  PUB_CONTENT_DIR: contentDir,
   PUB_BUILD_DIR: buildDir,
-  PUB_ASSET_DIR: assetDir,
-  PUB_SVELTE_CONFIG: configExists('svelte.config.js'),
-  PUB_TAILWIND_CONFIG: configExists('tailwind.config.js'),
-  PUB_VITE_CONFIG: configExists('vite.config.ts'),
+  PUB_SRC_DIR: srcDir,
 };
 
 console.log(pkg.name, pkg.version, {
