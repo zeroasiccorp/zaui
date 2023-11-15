@@ -66,12 +66,14 @@ const env = {
   PUB_SRC_DIR: srcDir,
 };
 
-console.log(pkg.name, pkg.version, {
-  viteFile,
-  viteCommand,
-  packageDir,
-  env,
-});
+console.log(pkg.name, pkg.version
+// {
+//  viteFile,
+//  viteCommand,
+//  packageDir,
+//  env,
+// }
+);
 
 child_process.execFileSync(viteFile, [viteCommand], {
   cwd: packageDir,

@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { color } from '$lib/color';
+  let cls = '';
+  export { cls as class };
 </script>
 
-<div style="color: {color};">
+<div class={cls}>
   <slot />
 </div>

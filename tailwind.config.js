@@ -15,6 +15,11 @@ let config = {
   plugins: [require('@tailwindcss/typography')],
 }
 
+// Merge user config from PUB_SRC_DIR if it exists
+// TODO: make sure that the typography plugin features are available
+//       for Intelliesense inside the srcDir of a user package.
+//       If not, we may need to merge in the other direction
+
 let srcDir = process.env.PUB_SRC_DIR;
 
 if (srcDir) {
