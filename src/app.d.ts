@@ -4,10 +4,9 @@ declare global {
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
-		interface PageData {
-			layoutComponents: { [key: string] : SvelteComponent};
-		}
+		// interface PageData {}
 		// interface Platform {}
+		type ComponentMap = { [key: string]: SvelteComponent };
 	}
 }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import * as env from '$lib/environment';
+  import * as env from '$app/environment';
   import Box from '$lib/components/Box.svelte';
   let text = 'From sveltekit-template';
 </script>
