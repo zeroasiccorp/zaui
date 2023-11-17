@@ -1,0 +1,19 @@
+<script lang="ts">
+  // https://lucide.dev/icons/workflow
+  let cls = '';
+  export { cls as class };
+</script>
+
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentcolor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={cls}
+>
+  <rect width="8" height="8" x="3" y="3" rx="2" />
+  <path d="M7 11v4a2 2 0 0 0 2 2h4" />
+  <rect width="8" height="8" x="13" y="13" rx="2" />
+</svg>
