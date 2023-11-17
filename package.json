@@ -1,7 +1,7 @@
 {
   "name": "sveltekit-template",
   "type": "module",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -21,11 +21,16 @@
     "pub": "bin/pub.js"
   },
   "dependencies": {
+    "@markdoc/markdoc": "^0.3.5",
     "@playwright/test": "^1.39.0",
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.27.4",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/js-yaml": "^4.0.9",
     "autoprefixer": "^10.4.14",
+    "clsx": "^2.0.0",
+    "js-yaml": "^4.1.0",
+    "p-limit": "^5.0.0",
     "postcss": "^8.4.24",
     "postcss-load-config": "^4.0.1",
     "svelte": "^4.2.2",

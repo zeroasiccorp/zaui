@@ -33,7 +33,9 @@ command is one of
 ```
 
 ### MVP TODO
-- Markdown file scan and rendering
-- Custom components - must work with TypeScript 😬
-- Themes - essential for effective re-use 😍
-- Testing - for components and markdown-driven UI ✅
+- Markdown file scan
+- Navbar cleanup
+- Icons cleanup
+- Custom fonts, prism themes, prism js
+- Static files in builds
+- Document custom config, ts limitations
