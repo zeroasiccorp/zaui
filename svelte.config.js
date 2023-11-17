@@ -7,6 +7,7 @@ const config = {
 
   kit: {
     alias: {
+      $src: process.env.PUB_SRC_DIR || './src/lib/$src',
     },
     adapter: adapter({
       pages: process.env.PUB_BUILD_DIR,
@@ -26,9 +27,5 @@ const config = {
     },
   },
 };
-
-if (process.env.PUB_SRC_DIR) {
-  config.kit.alias['src'] = process.env.PUB_SRC_DIR;
-}
 
 export default config;
