@@ -52,10 +52,12 @@ const buildDir = path.resolve(
 );
 
 // Similar to project-root/.vitepress directory
-// Used for optional tailwind.config.js and SvelteKit component src tree.
+// Directory need only exist for custom components.
 // defaults to projectDir/src
 // override with PUB_SRC_DIR, resolved relative to projectDir
-// NOTE: tailwind.config.js must be cjs (not esm) for non-async merge.
+// - directory must contain pub.config.js or pub.config.ts to be used.
+// - restart dev server after creating directory or renaming config file.
+// - tailwind.config.js must be cjs (not esm) for non-async merge.
 const srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
 
 // All directory paths should be fully resolved
