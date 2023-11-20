@@ -12,7 +12,7 @@ import path from 'node:path';
 import process from 'node:process';
 import url from 'node:url';
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+let __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 let binDir = path.resolve(__dirname, '..', 'node_modules', '.bin');
 let viteFile = path.resolve(binDir, 'vite');
@@ -29,14 +29,14 @@ if (!fs.existsSync(viteFile)) {
   }
 }
 
-const viteCommand = process.argv[2] || 'dev';
-const packageDir = path.resolve(__dirname, '..');
-const pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8'));
+let viteCommand = process.argv[2] || 'dev';
+let packageDir = path.resolve(__dirname, '..');
+let pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8'));
 
 // https://vitepress.dev/guide/routing#project-root
 // defaults to cwd except in this package where it defaults to docs
 // override with cli arg or PUB_PROJECT_DIR
-const projectDir = path.resolve(
+let projectDir = path.resolve(
   '.',
   process.argv[3] ?? process.env.PUB_PROJECT_DIR ?? (packageDir === path.resolve('.') ? 'docs' : '')
 );
@@ -48,7 +48,7 @@ const projectDir = path.resolve(
 // - use pub.config.js or pub.config.ts for custom components
 // - use tailwind.config.js (note: cjs - not esm) for tailwind config
 // - restart dev server after creating directory or renaming config file.
-const srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
+let srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
 if (!fs.existsSync(srcDir)) {
   srcDir = undefined;
 }
@@ -62,13 +62,13 @@ if (!fs.existsSync(contentDir)) {
 }
 
 // Create staticDir in temp directory
-const staticDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zaui-'));
+let staticDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zaui-'));
 // symlink content -> contentDir
-const targetContentDir = contentDir || path.join(packageDir, 'docs', 'content');
+let targetContentDir = contentDir || path.join(packageDir, 'docs', 'content');
 fs.symlinkSync(targetContentDir, path.join(staticDir, 'files'));
 // overlay symlinks -> srcDir/static/*
 if (srcDir) {
-  const srcStaticDir = path.join(srcDir, 'static');
+  let srcStaticDir = path.join(srcDir, 'static');
   if (fs.existsSync(srcStaticDir)) {
     overlayStaticDir(srcStaticDir);
   }
@@ -95,10 +95,10 @@ function overlayStaticDir(targetDir) {
 // https://kit.svelte.dev/docs/adapter-static#options-pages
 // defaults to projectDir/build
 // override with PUB_BUILD_DIR, resolved relative to projectDir
-const buildDir = path.resolve(projectDir, process.env.PUB_BUILD_DIR ?? 'build');
+let buildDir = path.resolve(projectDir, process.env.PUB_BUILD_DIR ?? 'build');
 
 // All directory paths should be fully resolved
-const env = {
+let env = {
   PUB_PROJECT_DIR: projectDir,
   PUB_CONTENT_DIR: contentDir,
   PUB_BUILD_DIR: buildDir,
