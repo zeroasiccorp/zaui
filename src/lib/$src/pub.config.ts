@@ -1,4 +1,9 @@
-let layoutComponents: App.ComponentMap = {};
-let iconComponents: App.ComponentMap = {};
+// Fallback config for when user project does not have a srcDir/pub.config.{js,ts}
+// See svelte.config.js
 
-export default { layoutComponents, iconComponents };
+let config: App.Config = {
+  layoutComponents: {},
+  iconComponents: {},
+};
+
+export default config;

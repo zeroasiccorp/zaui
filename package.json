@@ -1,12 +1,13 @@
 {
   "name": "sveltekit-template",
   "type": "module",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jldec/sveltekit-template"
   },
+  "types": "src/app.d.ts",
   "scripts": {
     "pub": "bin/pub.js",
     "docs": "bin/pub.js dev docs",

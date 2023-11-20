@@ -7,7 +7,12 @@ declare global {
 		// interface PageData {}
 		// interface Platform {}
 		type ComponentMap = { [key: string]: SvelteComponent };
+		interface Config {
+			layoutComponents?: ComponentMap;
+			iconComponents?: ComponentMap;
+		}
 	}
 }
 
-export {};
+export type ComponentMap = App.ComponentMap;
+export interface Config extends App.Config {};
