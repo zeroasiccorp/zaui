@@ -22,8 +22,7 @@
   // https://tailwindcss.com/docs/typography-plugin#element-modifiers
   const PROSE = clsx(
     'prose prose-slate max-w-none dark:prose-invert dark:text-slate-200',
-    // heading styles from tailwindui /syntax/src/components/Prose.jsx
-    'prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-normal lg:prose-headings:scroll-mt-[8.5rem]',
+    'prose-headings:font-display prose-headings:font-normal',
     'prose-a:font-normal prose-a:text-sky-600 prose-a:no-underline hover:prose-a:underline prose-a:dark:text-sky-400',
     'prose-li:my-1',
     // Avoid changing code blocks styles by prefixing prose-code: with [&:not(.pre)]: - see Codeblock.svelte
@@ -32,8 +31,7 @@
 </script>
 
 <svelte:head>
-  <link rel="icon" href="/images/{sc ? 'sc-favicon.png' : 'zero-favicon.jpg'}" />
-  <title>{sc ? 'SiliconCompiler' : 'Zero ASIC'}</title>
+  <script src="/js/prism.js" defer></script>
 </svelte:head>
 
 <Nav {config} />
@@ -56,28 +54,8 @@
   </div>
 {/if}
 
-<div class="">
-  {#if multicol}
-    <div class={PROSE}>
-      <slot />
-    </div>
-  {:else}
-    <div class="px-4 max-w-4xl mx-auto pt-8">
-      <div class={PROSE}>
-        <slot />
-      </div>
-    </div>
-  {/if}
-</div>
-
-<div class="mt-72 text-center text-slate-500 mb-8">
-  {#if sc}
-    <a href="/terms" class="hover:underline">Terms</a> |
-    <a href="/privacy" class="hover:underline">Privacy</a>
-  {:else}
-    ©2023 by Zero ASIC Corporation. All rights reserved.
-    <br>
-    <a href="/terms" class="hover:underline">Terms</a> |
-    <a href="/privacy" class="hover:underline">Privacy</a>
-  {/if}
+<div class="px-4 max-w-4xl mx-auto pt-8">
+  <div class={PROSE}>
+    <slot />
+  </div>
 </div>

@@ -1,5 +1,4 @@
 import type { LoadEvent } from '@sveltejs/kit';
-import { apiServer } from '$lib/endpoints';
 import * as env from '$app/environment';
 
 // https://www.typescriptlang.org/docs/handbook/2/objects.html#index-signatures
@@ -29,16 +28,18 @@ export async function loader(
   let data: LoadData = { url };
   let res;
   try {
-    // console.log('fetching', url);
-    // don't cache local files (TODO: allow cache for hosted UI)
+    // don't cache local files
+    // TODO: allow cache for built UI
     res = await evt.fetch(url, {cache: 'no-store'});
+    // console.log('loader fetch', url, res.status);
   } catch (e: any) {
-    // why any? https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
-    // also, since we can't serialize errors on server, just try to return a message
+    // https://kentcdodds.com/blog/get-a-catch-block-error-message-with-typescript
+    // since we don't capture errors on a server, just try to return a message
     if (url.endsWith('/api/mdfiles.json')) {
-      data[key] = [];
+      data[key] = ["index.md"];
       return data;
     }
+    // console.log('loader fetch error', e);
     return err({ ...data, error: `${e.message} ${url}` });
   }
   if (!res.ok) return err({ ...data, error: `${res.status} ${url}` });
@@ -65,12 +66,4 @@ export async function loader(
 function err(w: LoadData) {
   console.error(`Loader error (browser: ${env.browser})`, w);
   return w;
-}
-
-// override apiServer() in endpoints.ts
-// since loader requires file server during builds
-// but static builds should not render links with the extra server prefix
-export function server(path: string) {
-  // TODO: set endpoint for vite preview
-  return env.building ? `http://127.0.0.1:7777${path}` : apiServer(path);
 }

@@ -2,8 +2,6 @@
   import { page } from '$app/stores';
   import type { MarkdownFile } from '$lib/stores/model'; 
 
-  import { afterUpdate } from 'svelte';
-
   import pkg from '@markdoc/markdoc';
   const { parse, transform, Tag } = pkg;
 
@@ -18,6 +16,12 @@
   import CopyPasteCodeBlock from '$lib/components/CopyPasteCodeBlock.svelte';
   import Table from '$lib/components/Table.svelte';
   import Embed from '$lib/components/Embed.svelte';
+
+  import { afterUpdate } from 'svelte';
+  afterUpdate(async () => {
+    // @ts-ignore
+    window.Prism?.highlightAll();
+  });
 
   // Adapted from https://svelte.dev/repl/39fdc4d5e7af4c9ea0712aef6204ebba
 
@@ -42,11 +46,6 @@
 
   import yaml from 'js-yaml';
   import { fixlink } from '../fixlink';
-
-  afterUpdate(async () => {
-    // @ts-ignore
-    window.Prism?.highlightAll();
-  });
 
   const markdoc_config: Config = {
     nodes: {

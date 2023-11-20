@@ -1,13 +1,16 @@
 {
   "name": "sveltekit-template",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/jldec/sveltekit-template"
   },
   "scripts": {
+    "pub": "bin/pub.js",
+    "docs": "bin/pub.js dev docs",
+    "docs:build": "bin/pub.js build docs",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
@@ -29,6 +32,7 @@
     "@types/js-yaml": "^4.0.9",
     "autoprefixer": "^10.4.14",
     "clsx": "^2.0.0",
+    "fast-glob": "^3.3.2",
     "js-yaml": "^4.1.0",
     "p-limit": "^5.0.0",
     "postcss": "^8.4.24",

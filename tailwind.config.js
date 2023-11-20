@@ -1,5 +1,6 @@
 // https://tailwindcss.com/docs/guides/sveltekit
 // https://tailwindcss.com/docs/typography-plugin
+let defaultTheme = require('tailwindcss/defaultTheme');
 let merge = require('ts-deepmerge');
 let path = require('path');
 let fs = require('fs');
@@ -10,7 +11,19 @@ let content = ['./src/**/*.{html,js,svelte,ts}'];
 let config = {
   content,
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        display: ['Lexend', ...defaultTheme.fontFamily.sans],
+        logo: ['Oxanium', ...defaultTheme.fontFamily.sans],
+      },
+      maxWidth: {
+        '8xl': '88rem',
+      },
+      screens: {
+        xs: '400px',
+      },
+    }
   },
   plugins: [require('@tailwindcss/typography')],
 }

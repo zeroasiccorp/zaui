@@ -7,7 +7,8 @@ import Docs from '$lib/components/Docs.svelte';
 import Doc from '$lib/components/Doc.svelte';
 import Default from '$lib/components/Default.svelte';
 
-import { layoutComponents as userLayoutComponents } from '$src/pub.config';
+import config from '$src/pub.config';
+let userLayoutComponents = config?.layoutComponents || {};
 
 export let layoutComponents: App.ComponentMap = {
   Default,

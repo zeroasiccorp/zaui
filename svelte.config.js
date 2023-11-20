@@ -10,6 +10,7 @@ if (
   (fs.existsSync(path.join(userSrc, 'pub.config.js')) ||
     fs.existsSync(path.join(userSrc, 'pub.config.ts')))
 ) {
+  // console.log('Using custom $src path:', userSrc);
   $src = userSrc;
 }
 
@@ -20,6 +21,9 @@ const config = {
   kit: {
     alias: {
       $src,
+    },
+    files: {
+      assets: process.env.PUB_STATIC_DIR || 'static',
     },
     adapter: adapter({
       pages: process.env.PUB_BUILD_DIR,

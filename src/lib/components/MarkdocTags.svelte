@@ -12,8 +12,7 @@
 
   export let tags: RenderableTreeNode | RenderableTreeNode[];
 
-  type ComponentMap = { [key: string]: ConstructorOfATypedSvelteComponent };
-  export let components: ComponentMap;
+  export let components: App.ComponentMap;
 
   // https://html.spec.whatwg.org/#void-elements
   // prettier-ignore

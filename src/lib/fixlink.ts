@@ -1,5 +1,3 @@
-import { fileServer } from './endpoints';
-
 /*** Fix links in markdown files
  * @param href - the link to fix
  * @param pageprefix - shared prefix for links other pages
@@ -11,7 +9,7 @@ export function fixlink(href:string, pageprefix:string = '', path:string = '') {
   if (href.match(/^\/$|^#|^https?:\/\//)) return href;
 
   // default to file links e.g. to fetch images
-  let prefix = fileServer();
+  let prefix = '/files';
 
   // treat directories and .md extensions as page links
   // directories include paths without extensions

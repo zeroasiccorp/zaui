@@ -72,7 +72,7 @@
       {#each navlinks as link}
         <a
           href={link.href}
-          title={link.icon ? link.text : ''}
+          title={link.icon ? (link.text ?? link.href) : ''}
           class={clsx(
             'mb-2 mr-4 font-display text-sm dark:text-sky-400',
             'border-b-2 border-transparent hover:border-orange-400',
@@ -82,7 +82,7 @@
           {#if link.icon}
             <svelte:component this={icons[link.icon]} class="h-6 w-6 mb-1" />
           {:else}
-            {link.text}
+            {link.text ?? link.href}
           {/if}
         </a>
       {/each}

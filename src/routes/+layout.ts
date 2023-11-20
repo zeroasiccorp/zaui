@@ -2,7 +2,7 @@ export const prerender = 'auto';
 import { building } from '$app/environment';
 import { get } from 'svelte/store';
 import type { LoadEvent } from '@sveltejs/kit';
-import { loader, server } from '$lib/loader';
+import { loader } from '$lib/loader';
 import { model, type MarkdownFiles, type MarkdownFile } from '$lib/stores/model';
 import { formatDate } from '$lib/formatDate';
 import { layoutComponents, pathLayout } from '$lib/components';
@@ -30,7 +30,7 @@ export async function load(evt: LoadEvent) {
       error?: string;
     };
 
-    let files: Files = await loader(server('/api/mdfiles.json'), 'files', evt);
+    let files: Files = await loader('/api/mdfiles.json', 'files', evt);
     if (files.error) {
       data.status = files.error;
     }
@@ -67,12 +67,8 @@ export async function load(evt: LoadEvent) {
   if (!data.config.navlinks?.length) {
     data.config.navlinks = [
       {
-        href: '/emulation',
-        text: 'Chipmaker'
-      },
-      {
         href: '/docs',
-        text: 'Chiplets'
+        text: 'Docs',
       },
     ];
   }
@@ -84,23 +80,33 @@ export async function load(evt: LoadEvent) {
   let frontmatter = content?.frontmatter || {};
   let layout = layoutComponents[frontmatter.layout] || pathLayout(path);
 
+  // console.log('path layout for:', path, 'is:', layout);
+  // console.log('frontmatter.layout:', frontmatter.layout);
+  // console.log('pathLayout(path):', pathLayout(path))
+
   // content may be undefined if there is no md file - see [...path]/page.ts
   return { content, frontmatter, layout, config: data.config };
 }
 
 async function getMarkdown(filepath: string, evt: LoadEvent, prefix = '/files/') {
-  let md = await loader(server(`${prefix}${filepath}`), 'markdown', evt, false);
+  let md = await loader(`${prefix}${filepath}`, 'markdown', evt, false);
   let data: MarkdownFile = { filepath, ...md };
   if (!data.error) {
     data.ast = parse(data.markdown);
-    try {
-      data.frontmatter = yaml.load(data.ast.attributes.frontmatter);
+    if (data.ast?.attributes?.frontmatter) {
+      try {
+        data.frontmatter = yaml.load(data.ast.attributes.frontmatter);
+      } catch (err) {
+        data.yamlError = '' + err;
+        if (building) throw err;
+      }
+    } else {
+      data.frontmatter = {};
     }
-    catch (err) {
-      data.yamlError = ''+err;
-      if (building) throw err;
-    }
-    data.byline = [(data.frontmatter?.author ?? ''), formatDate(data.frontmatter?.date)].filter(Boolean).join(' - ');
+
+    data.byline = [data.frontmatter?.author ?? '', formatDate(data.frontmatter?.date)]
+      .filter(Boolean)
+      .join(' - ');
   }
   return data;
 }
