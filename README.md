@@ -1,16 +1,3 @@
----
-icon:
-  image: 💥
-  text: zaui
-navlinks:
-  - href: /markdown
-    text: markdown
-  - href: /debug
-    text: debug
-  - href: /docs
-    text: docs
----
-
 # [WIP] sveltekit-template
 SvelteKit-powered toolchain for publishing websites from Markdown files.
 

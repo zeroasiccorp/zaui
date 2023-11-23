@@ -6,16 +6,28 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import fg from 'fast-glob';
 
-export const GET: RequestHandler = async ({fetch}) => {
+import path from 'node:path';
+import url from 'node:url';
+import fs from 'node:fs';
+
+let __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+let packageDir = path.resolve(__dirname, '../../../..');
+
+export const GET: RequestHandler = async ({ fetch }) => {
   // TODO - If there is a local content server, fetch from that
   // let res = await fetch('http://127.0.0.1:7777/api/mdfiles.json');
   // return json(await res.json());
 
-  let prefix = process.env.PUB_CONTENT_DIR ?? './static/files';
-  let globPath = prefix + '/**/*.md';
-  // https://github.com/mrmlnc/fast-glob#readme
-  let files = (await fg.glob(globPath)).map((file) => file.slice(prefix.length+1))
-  // console.log('+server.ts /api/mdfiles.json', globPath);
-  // console.log('markdown files', files);
+  let files: string[] = [];
+  let prefix = process.env.PUB_CONTENT_DIR ?? path.join(packageDir, 'static/files');
+  if (!fs.existsSync(prefix)) {
+    console.log(`Content directory: '${prefix}' does not exist.`, );
+  } else {
+    // https://github.com/mrmlnc/fast-glob#readme
+    let globPath = path.join(prefix, '/**/*.md');
+    files = (await fg.glob(globPath)).map((file) => file.slice(prefix.length + 1));
+    console.log('+server.ts /api/mdfiles.json', globPath);
+    console.log('markdown files', files);
+  }
   return json(files);
-}
+};

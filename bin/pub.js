@@ -34,12 +34,9 @@ let packageDir = path.resolve(__dirname, '..');
 let pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf8'));
 
 // https://vitepress.dev/guide/routing#project-root
-// defaults to cwd except in this package where it defaults to docs
+// defaults to cwd
 // override with cli arg or PUB_PROJECT_DIR
-let projectDir = path.resolve(
-  '.',
-  process.argv[3] ?? process.env.PUB_PROJECT_DIR ?? (packageDir === path.resolve('.') ? 'docs' : '')
-);
+let projectDir = path.resolve('.', process.argv[3] ?? process.env.PUB_PROJECT_DIR ?? '');
 
 // Similar to project-root/.vitepress directory
 // defaults to projectDir/src
@@ -58,14 +55,14 @@ if (!fs.existsSync(srcDir)) {
 // override with PUB_CONTENT_DIR, resolved relative to projectDir
 let contentDir = path.resolve(projectDir, process.env.PUB_CONTENT_DIR ?? 'content');
 if (!fs.existsSync(contentDir)) {
-  contentDir = undefined;
+  console.log(`No content directory found at ${contentDir} - using static files from package.`);
+  contentDir = path.join(packageDir, 'static', 'files');
 }
 
 // Create staticDir in temp directory
 let staticDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zaui-'));
 // symlink content -> contentDir
-let targetContentDir = contentDir || path.join(packageDir, 'docs', 'content');
-fs.symlinkSync(targetContentDir, path.join(staticDir, 'files'));
+fs.symlinkSync(contentDir, path.join(staticDir, 'files'));
 // overlay symlinks -> srcDir/static/*
 if (srcDir) {
   let srcStaticDir = path.join(srcDir, 'static');
@@ -104,6 +101,7 @@ let env = {
   PUB_BUILD_DIR: buildDir,
   PUB_SRC_DIR: srcDir,
   PUB_STATIC_DIR: staticDir,
+  PUB_PACKAGE_DIR: packageDir,
 };
 
 console.log(pkg.name, pkg.version, env);
