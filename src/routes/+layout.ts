@@ -15,13 +15,14 @@ import pkg from '@markdoc/markdoc';
 const { parse } = pkg;
 
 import yaml from 'js-yaml';
+import appConfig from '$src/pub.config';
 
 export async function load(evt: LoadEvent) {
   let data: MarkdownFiles = get(model);
   // data is undefined on first get()
   // TODO: self-initialize model store
   if (!data) {
-    data = { files: [], config: {}, fileMap: {}, status: '' };
+    data = { files: [], config: {}, fileMap: {}, status: '', appConfig };
     model.set(data);
     let tstart = Date.now();
 

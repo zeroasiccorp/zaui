@@ -1,7 +1,12 @@
 ---
+icon:
+  image: 💥
+  text: zaui
 navlinks:
   - href: /markdown
     text: markdown
+  - href: /debug
+    text: debug
   - href: /docs
     text: docs
 ---
@@ -40,7 +45,7 @@ command is one of
 
 ### MVP TODO
 - Document custom config, ts limitations
-- create-zaui package for pnpm create zaui@latest
+- Package to initialize a project with `npm create zaui@latest`
 - Nice docs sidebar
 - head section: title, meta og header tags
 - generated redirects

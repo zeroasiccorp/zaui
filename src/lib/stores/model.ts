@@ -35,6 +35,12 @@ export interface Config {
     title?: string;
     subtitle?: string;
   };
+  icon?: {
+    image?: string;
+    imageclass?: string;
+    text: string;
+    imageonly?: boolean;
+  }
 }
 
 export type MarkdownFiles = {
@@ -42,6 +48,7 @@ export type MarkdownFiles = {
   files: Array<string>;
   fileMap: { [key: string]: MarkdownFile };
   status: string;
+  appConfig: App.AppConfig;
 };
 
 export const model = writable<MarkdownFiles>();

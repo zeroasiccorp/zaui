@@ -6,11 +6,13 @@ import Job from '$lib/components/Job.svelte';
 import Docs from '$lib/components/Docs.svelte';
 import Doc from '$lib/components/Doc.svelte';
 import Default from '$lib/components/Default.svelte';
+import Debug from '$lib/components/Debug.svelte';
 
-import config from '$src/pub.config';
-let userLayoutComponents = config?.layoutComponents || {};
+import appConfig from '$src/pub.config';
+let userLayoutComponents = appConfig?.layoutComponents || {};
 
 export let layoutComponents: App.ComponentMap = {
+  Debug,
   Default,
   Blog,
   BlogPost,
@@ -26,6 +28,7 @@ export function pathLayout(path: string) {
   if (path === 'blog') return Blog;
   if (path === 'careers') return Careers;
   if (path === 'docs') return Docs;
+  if (path === 'debug') return Debug;
 
   if (path.startsWith('blog/')) return BlogPost;
   if (path.startsWith('careers/')) return Job;

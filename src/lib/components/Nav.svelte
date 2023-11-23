@@ -4,10 +4,14 @@
   import { clsx } from 'clsx';
 
   // menu
-  import ZeroIcon from '$lib/components/icons/Zero.svelte';
   import MenuIcon from '$lib/components/icons/Menu.svelte';
   import XIcon from '$lib/components/icons/X.svelte';
   import { slide } from 'svelte/transition';
+
+  // sessions and login
+  import appConfig from '$src/pub.config';
+  import LoginDialog from '$lib/components/LoginDialog.svelte';
+  import UserMenu from '$lib/components/UserMenu.svelte';
 
   import type { Config } from '$lib/stores/model';
   export let config: Config;
@@ -36,6 +40,10 @@
   }
 </script>
 
+{#if appConfig?.auth}
+  <LoginDialog />
+{/if}
+
 <nav
   class="sticky top-0 z-20 flex flex-row justify-between px-4 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black"
 >
@@ -45,14 +53,20 @@
     on:click={hideNav}
     class="order-2 pt-3 pb-2 border-b-2 border-transparent hover:border-orange-400"
   >
-    {#if sc}
-      <img
-        src="/images/siliconcompiler.webp"
-        alt="SiliconCompiler"
-        class="w-[304px] h-[83px] object-scale-down"
-      />
-    {:else}
-      <ZeroIcon class="h-[24px] w-[100px]" />
+    {#if config?.icon?.image}
+      <!-- TODO: replace with https://github.com/mathiasbynens/emoji-regex -->
+      {#if /\p{Emoji}/u.test(config.icon.image)}
+        <span class="text-2xl leading-none">{config.icon.image}</span>
+      {:else}
+        <img
+          src={config.icon.image}
+          alt={config.icon.text ?? 'Icon'}
+          class={config.icon.imageclass ?? ''}
+        />
+      {/if}
+    {/if}
+    {#if config?.icon?.text && !config?.icon?.imageonly}
+      <span class="font-logo text-2xl leading-none tracking-widest font-medium">{config?.icon?.text ?? 'Zaui'}</span>
     {/if}
   </a>
   {#if navlinks?.length}
@@ -86,6 +100,9 @@
           {/if}
         </a>
       {/each}
+    </div>
+    <div class="order-4">
+      {#if appConfig?.auth}<UserMenu />{:else}&nbsp;{/if}
     </div>
   {/if}
 </nav>
@@ -148,4 +165,3 @@
     {/each}
   </nav>
 {/if}
-

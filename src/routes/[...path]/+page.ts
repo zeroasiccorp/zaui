@@ -8,6 +8,7 @@ export const load = (async ({ parent, url }) => {
   let content = data?.content;
   let navlinks = data?.config?.navlinks;
   let preview = data?.config?.preview;
+  // console.log('page load', url.pathname, navlinks, preview)
   if (
     // force 404 for pages with no markdown and no navlinks
     !content &&

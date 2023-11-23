@@ -27,8 +27,8 @@ import Workflow from '$lib/components/icons/Workflow.svelte';
 import X from '$lib/components/icons/X.svelte';
 import Zero from '$lib/components/icons/Zero.svelte';
 
-import config from '$src/pub.config';
-let userIconComponents = config?.iconComponents || {};
+import appConfig from '$src/pub.config';
+let userIconComponents = appConfig?.iconComponents || {};
 
 // Keys in this map can be navlinks icon values in root frontmatter config
 export const icons: App.ComponentMap = {

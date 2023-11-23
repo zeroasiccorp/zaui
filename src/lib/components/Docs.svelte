@@ -12,6 +12,8 @@
 
 {#if content}
   <Markdoc {content} />
+{:else}
+  <h2>Documentation</h2>
 {/if}
 
 <div class="flex flex-wrap gap-8 justify-center">
