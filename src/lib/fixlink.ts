@@ -11,9 +11,8 @@ export function fixlink(href:string, pageprefix:string = '', path:string = '') {
   // default to file links e.g. to fetch images
   let prefix = '/files';
 
-  // treat directories and .md extensions as page links
-  // directories include paths without extensions
-  if (href.match(/\/[^.]+$|\.md$/i)) {
+  // treat extensionless and .md paths as page links
+  if (href.match(/(\/|^)[^.]+$|\.md$/i)) {
     prefix = pageprefix;
   }
 

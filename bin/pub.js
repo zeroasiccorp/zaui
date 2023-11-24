@@ -50,6 +50,15 @@ if (!fs.existsSync(srcDir)) {
   srcDir = undefined;
 }
 
+let configDir = srcDir;
+if (
+  !srcDir ||
+  (!fs.existsSync(path.join(srcDir, 'pub.config.js')) &&
+    !fs.existsSync(path.join(srcDir, 'pub.config.ts')))
+) {
+  configDir = undefined;
+}
+
 // https://vitepress.dev/guide/routing#source-directory
 // defaults to projectDir/content
 // override with PUB_CONTENT_DIR, resolved relative to projectDir
@@ -100,6 +109,7 @@ let env = {
   PUB_CONTENT_DIR: contentDir,
   PUB_BUILD_DIR: buildDir,
   PUB_SRC_DIR: srcDir,
+  PUB_APPCONFIG_DIR: configDir,
   PUB_STATIC_DIR: staticDir,
   PUB_PACKAGE_DIR: packageDir,
 };

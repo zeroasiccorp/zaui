@@ -5,7 +5,7 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
 
-  import appConfig from '$src/pub.config'
+  import appConfig from '$appconfig/pub.config'
   import { user, token, session, sessionLoaded, type Session, type Log } from '$lib/stores/session';
 
   import XIcon from '$lib/components/icons/X.svelte';

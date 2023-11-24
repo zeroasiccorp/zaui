@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { icons } from '$lib/icons';
+  import { icons } from '$lib/components';
   import { clsx } from 'clsx';
 
   // menu
@@ -9,7 +9,7 @@
   import { slide } from 'svelte/transition';
 
   // sessions and login
-  import appConfig from '$src/pub.config';
+  import appConfig from '$appconfig/pub.config';
   import LoginDialog from '$lib/components/LoginDialog.svelte';
   import UserMenu from '$lib/components/UserMenu.svelte';
 
@@ -18,9 +18,6 @@
 
   let path: string;
   $: path = $page.url.pathname;
-
-  let sc: boolean;
-  $: sc = config?.theme === 'SiliconCompiler';
 
   let navlinks: typeof config.navlinks;
   $: navlinks = config?.navlinks?.filter((link) => !link.previewOnly || config?.preview);
@@ -40,7 +37,7 @@
   }
 </script>
 
-{#if appConfig?.auth}
+{#if appConfig.auth}
   <LoginDialog />
 {/if}
 
@@ -57,6 +54,8 @@
       <!-- TODO: replace with https://github.com/mathiasbynens/emoji-regex -->
       {#if /\p{Emoji}/u.test(config.icon.image)}
         <span class="text-2xl leading-none">{config.icon.image}</span>
+      {:else if Object.keys(icons).includes(config.icon.image)}
+        <svelte:component this={icons[config.icon.image]} class="h-[24px]" />
       {:else}
         <img
           src={config.icon.image}
@@ -65,8 +64,10 @@
         />
       {/if}
     {/if}
-    {#if config?.icon?.text && !config?.icon?.imageonly}
-      <span class="font-logo text-2xl leading-none tracking-widest font-medium">{config?.icon?.text ?? 'Zaui'}</span>
+    {#if !config?.icon?.image || config?.icon?.text}
+      <span class="font-logo text-2xl leading-none tracking-widest font-medium"
+        >{config?.icon?.text ?? 'Zaui'}</span
+      >
     {/if}
   </a>
   {#if navlinks?.length}
@@ -86,7 +87,7 @@
       {#each navlinks as link}
         <a
           href={link.href}
-          title={link.icon ? (link.text ?? link.href) : ''}
+          title={link.icon ? link.text ?? link.href : ''}
           class={clsx(
             'mb-2 mr-4 font-display text-sm dark:text-sky-400',
             'border-b-2 border-transparent hover:border-orange-400',
@@ -102,7 +103,7 @@
       {/each}
     </div>
     <div class="order-4">
-      {#if appConfig?.auth}<UserMenu />{:else}&nbsp;{/if}
+      {#if appConfig.auth}<UserMenu />{:else}&nbsp;{/if}
     </div>
   {/if}
 </nav>
@@ -161,7 +162,7 @@
         )}
       >
         {link.text}
-     </a>
+      </a>
     {/each}
   </nav>
 {/if}

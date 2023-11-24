@@ -1,18 +1,5 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/kit/vite';
-import fs from 'node:fs';
-import path from 'node:path';
-
-let $src = './src/lib/$src';
-let userSrc = process.env.PUB_SRC_DIR;
-if (
-  userSrc &&
-  (fs.existsSync(path.join(userSrc, 'pub.config.js')) ||
-    fs.existsSync(path.join(userSrc, 'pub.config.ts')))
-) {
-  // console.log('Using custom $src path:', userSrc);
-  $src = userSrc;
-}
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,13 +7,18 @@ const config = {
 
   kit: {
     alias: {
-      $src,
+      // Similar to $lib but for appConfig
+      // Points to directory with custom components and pub.config.{js,ts}
+      // Results in path alias in .svelte-kit/tsconfig.json
+      $appconfig: process.env.PUB_APPCONFIG_DIR || 'src/appconfig',
     },
     files: {
+      // Points to directory with static assets
+      // pub.js creates temp dir with overlay of static + user-static + content dirs
       assets: process.env.PUB_STATIC_DIR || 'static',
     },
     adapter: adapter({
-      pages: process.env.PUB_BUILD_DIR,
+      pages: process.env.PUB_BUILD_DIR || 'build',
       // https://kit.svelte.dev/docs/adapter-static#options-fallback
       fallback: '404.html',
       precompress: false,

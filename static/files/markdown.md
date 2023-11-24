@@ -22,8 +22,13 @@
 2. item 3
 
 ### Inline formatting
-- relative link [testfiles/cpu/README.md](testfiles/cpu/README.md)
+- relative link [./debug.md](./debug.md)
+- relative link [./debug](./debug)
+- relative link [debug.md](debug.md)
+- relative link [debug](debug)
+- relative link [../../](../../)
 - external link [https://docs.python.org/3/](https://docs.python.org/3/)
+- external link [//docs.python.org/3/](//docs.python.org/3/)
 - this is _italic_ inline
 - this is **bold** inline
 - this is _**bold and italic**_ inline
@@ -55,19 +60,29 @@ Things were not too simple in this _safari_ because things had changed very much
 
 ### Javascript code block
 ```js
-import adapter from '@sveltejs/adapter-static';
-import { vitePreprocess } from '@sveltejs/kit/vite';
-import fs from 'node:fs';
-import path from 'node:path';
+let defaultTheme = require('tailwindcss/defaultTheme');
 
-let $src = './src/lib/$src';
-let userSrc = process.env.PUB_SRC_DIR;
-if (
-  userSrc &&
-  (fs.existsSync(path.join(userSrc, 'pub.config.js')) ||
-    fs.existsSync(path.join(userSrc, 'pub.config.ts')))
-) {
-  $src = userSrc;
+let content = ['./src/**/*.{html,js,svelte,ts}'];
+
+/** @type {import('tailwindcss').Config} */
+let config = {
+  content,
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+        display: ['Lexend', ...defaultTheme.fontFamily.sans],
+        logo: ['Oxanium', ...defaultTheme.fontFamily.sans],
+      },
+      maxWidth: {
+        '8xl': '88rem',
+      },
+      screens: {
+        xs: '400px',
+      },
+    }
+  },
+  plugins: [require('@tailwindcss/typography')],
 }
 ```
 

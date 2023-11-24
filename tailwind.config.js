@@ -40,6 +40,7 @@ if (srcDir) {
 
   const configFile = path.join(srcDir, 'tailwind.config.js');
   if (fs.existsSync(configFile)) {
+    // console.log(`Using custom tailwind config from ${configFile}`);
     let userConfig = require(configFile);
     config = { ...merge(config, userConfig), content };
   }
