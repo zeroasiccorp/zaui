@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
-// CLI for sveltekit-template
+// CLI for zaui
 // Sets environment variables and launches vite dev/build/preview.
-// TODO: It would be nicer to invoke vite directly and pass config in memory.
+// It would be nicer to invoke vite directly and pass config in memory.
+// TODO: add support for other npm scripts (e.g. check, test...)
 
 import child_process from 'node:child_process';
 

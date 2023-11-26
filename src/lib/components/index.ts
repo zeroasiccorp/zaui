@@ -1,54 +1,58 @@
 // Map layout component names to Svelte components
-import Blog from '$lib/components/Blog.svelte';
-import BlogPost from '$lib/components/BlogPost.svelte';
-import Careers from '$lib/components/Careers.svelte';
-import Job from '$lib/components/Job.svelte';
-import Docs from '$lib/components/Docs.svelte';
-import Doc from '$lib/components/Doc.svelte';
-import Default from '$lib/components/Default.svelte';
-import Debug from '$lib/components/Debug.svelte';
+import Blog from './Blog.svelte';
+import BlogPost from './BlogPost.svelte';
+import Careers from './Careers.svelte';
+import Contact from './Contact.svelte';
+import Debug from './Debug.svelte';
+import Default from './Default.svelte';
+import Doc from './Doc.svelte';
+import Docs from './Docs.svelte';
+import Job from './Job.svelte';
+import Newsletter from './Newsletter.svelte';
 
 // Map icon names to Svelte components
-import ArrowLeft from '$lib/components/icons/ArrowLeft.svelte';
-import BookCopy from '$lib/components/icons/BookCopy.svelte';
-import BrainCircuit from '$lib/components/icons/BrainCircuit.svelte';
-import CircuitBoard from '$lib/components/icons/CircuitBoard.svelte';
-import CloudCog from '$lib/components/icons/CloudCog.svelte';
-import Cpu from '$lib/components/icons/Cpu.svelte';
-import Factory from '$lib/components/icons/Factory.svelte';
-import FileBox from '$lib/components/icons/FileBox.svelte';
-import Files from '$lib/components/icons/Files.svelte';
-import Folder from '$lib/components/icons/Folder.svelte';
-import GitHub from '$lib/components/icons/GitHub.svelte';
-import Grid from '$lib/components/icons/Grid.svelte';
-import Home from '$lib/components/icons/Home.svelte';
-import Inspect from '$lib/components/icons/Inspect.svelte';
-import LayoutGrid from '$lib/components/icons/LayoutGrid.svelte';
-import LinkedIn from '$lib/components/icons/LinkedIn.svelte';
-import Menu from '$lib/components/icons/Menu.svelte';
-import MonitorSmartphone from '$lib/components/icons/MonitorSmartphone.svelte';
-import SendToBack from '$lib/components/icons/SendToBack.svelte';
-import Sliders from '$lib/components/icons/Sliders.svelte';
-import User from '$lib/components/icons/User.svelte';
-import UserCheck from '$lib/components/icons/UserCheck.svelte';
-import Users from '$lib/components/icons/Users.svelte';
-import Workflow from '$lib/components/icons/Workflow.svelte';
-import X from '$lib/components/icons/X.svelte';
-import Zero from '$lib/components/icons/Zero.svelte';
+import ArrowLeft from './icons/ArrowLeft.svelte';
+import BookCopy from './icons/BookCopy.svelte';
+import BrainCircuit from './icons/BrainCircuit.svelte';
+import CircuitBoard from './icons/CircuitBoard.svelte';
+import CloudCog from './icons/CloudCog.svelte';
+import Cpu from './icons/Cpu.svelte';
+import Factory from './icons/Factory.svelte';
+import FileBox from './icons/FileBox.svelte';
+import Files from './icons/Files.svelte';
+import Folder from './icons/Folder.svelte';
+import GitHub from './icons/GitHub.svelte';
+import Grid from './icons/Grid.svelte';
+import Home from './icons/Home.svelte';
+import Inspect from './icons/Inspect.svelte';
+import LayoutGrid from './icons/LayoutGrid.svelte';
+import LinkedIn from './icons/LinkedIn.svelte';
+import Menu from './icons/Menu.svelte';
+import MonitorSmartphone from './icons/MonitorSmartphone.svelte';
+import SendToBack from './icons/SendToBack.svelte';
+import Sliders from './icons/Sliders.svelte';
+import User from './icons/User.svelte';
+import UserCheck from './icons/UserCheck.svelte';
+import Users from './icons/Users.svelte';
+import Workflow from './icons/Workflow.svelte';
+import X from './icons/X.svelte';
+import Zero from './icons/Zero.svelte';
 
 import appConfig from '$appconfig/app.config';
 let userLayoutComponents = appConfig.layoutComponents || {};
 let userIconComponents = appConfig.iconComponents || {};
 
 export let layoutComponents: App.ComponentMap = {
-  Debug,
-  Default,
   Blog,
   BlogPost,
   Careers,
-  Job,
-  Docs,
+  Contact,
+  Debug,
+  Default,
   Doc,
+  Docs,
+  Job,
+  Newsletter,
   ...userLayoutComponents,
 };
 

@@ -14,7 +14,8 @@ export const load = (async ({ parent, url }) => {
     !content &&
     !navlinks?.find(
       (link) => link.href === url.pathname && (!link.previewOnly || (link.previewOnly && preview))
-    )
+    ) &&
+    url.pathname !== '/debug'
   ) {
     throw error(404, { message: `${url} could not be found. Please check the URL` });
   }
