@@ -36,17 +36,17 @@ let pkg = JSON.parse(fs.readFileSync(path.join(packageDir, 'package.json'), 'utf
 
 // https://vitepress.dev/guide/routing#project-root
 // defaults to cwd
-// override with cli arg or PUB_PROJECT_DIR
-let projectDir = path.resolve('.', process.argv[3] ?? process.env.PUB_PROJECT_DIR ?? '');
+// override with cli arg or ZAUI_PROJECT_DIR
+let projectDir = path.resolve('.', process.argv[3] ?? process.env.ZAUI_PROJECT_DIR ?? '');
 
 // Similar to project-root/.vitepress directory
 // defaults to projectDir/src
-// override with PUB_SRC_DIR, resolved relative to projectDir
+// override with ZAUI_SRC_DIR, resolved relative to projectDir
 // Optional:
 // - use app.config.js or app.config.ts for custom components
 // - use tailwind.config.js (note: cjs - not esm) for tailwind config
 // - restart dev server after creating directory or renaming config file.
-let srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
+let srcDir = path.resolve(projectDir, process.env.ZAUI_SRC_DIR ?? 'src');
 if (!fs.existsSync(srcDir)) {
   srcDir = undefined;
 }
@@ -62,8 +62,8 @@ if (
 
 // https://vitepress.dev/guide/routing#source-directory
 // defaults to projectDir/content
-// override with PUB_CONTENT_DIR, resolved relative to projectDir
-let contentDir = path.resolve(projectDir, process.env.PUB_CONTENT_DIR ?? 'content');
+// override with ZAUI_CONTENT_DIR, resolved relative to projectDir
+let contentDir = path.resolve(projectDir, process.env.ZAUI_CONTENT_DIR ?? 'content');
 if (!fs.existsSync(contentDir)) {
   console.log(`No content directory found at ${contentDir} - using static files from package.`);
   contentDir = path.join(packageDir, 'static', 'files');
@@ -101,18 +101,18 @@ function overlayStaticDir(targetDir) {
 
 // https://kit.svelte.dev/docs/adapter-static#options-pages
 // defaults to projectDir/build
-// override with PUB_BUILD_DIR, resolved relative to projectDir
-let buildDir = path.resolve(projectDir, process.env.PUB_BUILD_DIR ?? 'build');
+// override with ZAUI_BUILD_DIR, resolved relative to projectDir
+let buildDir = path.resolve(projectDir, process.env.ZAUI_BUILD_DIR ?? 'build');
 
 // All directory paths should be fully resolved
 let env = {
-  PUB_PROJECT_DIR: projectDir,
-  PUB_CONTENT_DIR: contentDir,
-  PUB_BUILD_DIR: buildDir,
-  PUB_SRC_DIR: srcDir,
-  PUB_APPCONFIG_DIR: configDir,
-  PUB_STATIC_DIR: staticDir,
-  PUB_PACKAGE_DIR: packageDir,
+  ZAUI_PROJECT_DIR: projectDir,
+  ZAUI_CONTENT_DIR: contentDir,
+  ZAUI_BUILD_DIR: buildDir,
+  ZAUI_SRC_DIR: srcDir,
+  ZAUI_APPCONFIG_DIR: configDir,
+  ZAUI_STATIC_DIR: staticDir,
+  ZAUI_PACKAGE_DIR: packageDir,
 };
 
 // Pass PUBLIC_* env vars for access via import from '$env/static/public'

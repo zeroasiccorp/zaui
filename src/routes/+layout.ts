@@ -5,7 +5,7 @@ import type { LoadEvent } from '@sveltejs/kit';
 import { loader } from '$lib/loader';
 import { model, type MarkdownFiles, type MarkdownFile } from '$lib/stores/model';
 import { formatDate } from '$lib/formatDate';
-import { layoutComponents, pathLayout } from '$lib/components';
+import { layoutComponents, pathLayout } from '$lib/componentMaps';
 import { PUBLIC_PRODUCTION } from '$env/static/public';
 
 import plimit from 'p-limit';

@@ -23,7 +23,8 @@
     "./tests/**/*.svelte",
     "../../../src/global.d.ts",
     "../../../src/**/*.js",
-    "../../../src/**/*.ts"
+    "../../../src/**/*.ts",
+    "../../../src/**/*.svelte",
   ],
-  "exclude": ["./node_modules/**", "../../../src/static/**", "../../../src/content/**"]
+  "exclude": ["../../../src/static/**", "../../../src/content/**"]
 }

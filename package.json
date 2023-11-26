@@ -1,7 +1,7 @@
 {
   "name": "@zeroasic/zaui",
   "type": "module",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -9,9 +9,7 @@
   },
   "types": "src/app.d.ts",
   "scripts": {
-    "pub": "bin/pub.js",
-    "docs": "bin/pub.js dev docs",
-    "docs:build": "bin/pub.js build docs",
+    "zaui": "bin/zaui.js",
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",

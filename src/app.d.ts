@@ -1,16 +1,20 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
+import type { ComponentType, SvelteComponent } from "svelte";
+
 declare global {
   namespace App {
     // interface Error {}
     // interface Locals {}
     // interface PageData {}
     // interface Platform {}
-    type ComponentMap = { [key: string]: SvelteComponent };
+
+    type ComponentMap = { [key: string]: ComponentType<SvelteComponent> };
 
     interface AppConfig {
       layoutComponents?: ComponentMap;
       iconComponents?: ComponentMap;
+      markdownComponents?: ComponentMap;
       endpoints?: {
         auth?: string;
       };

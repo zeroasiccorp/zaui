@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import type { MarkdownFile } from '$lib/stores/model'; 
+  import type { MarkdownFile } from '$lib/stores/model';
 
   import pkg from '@markdoc/markdoc';
   const { parse, transform, Tag } = pkg;
@@ -16,6 +16,7 @@
   import CopyPasteCodeBlock from '$lib/components/CopyPasteCodeBlock.svelte';
   import Table from '$lib/components/Table.svelte';
   import Embed from '$lib/components/Embed.svelte';
+  import { markdownComponents } from '$lib/componentMaps';
 
   import { afterUpdate } from 'svelte';
   afterUpdate(async () => {
@@ -35,7 +36,7 @@
   let route = $page.route.id;
   let frontmatter = {};
 
-  const components = {
+  const baseMarkdownComponents = {
     Callout,
     Time,
     Codeblock,
@@ -60,21 +61,21 @@
                 params.proj
                   ? `/za/${params.proj}`
                   : params.blog
-                  ? `/${params.blog}`
-                  : params.docs
-                  ? `/${params.docs}`
-                  : '',
+                    ? `/${params.blog}`
+                    : params.docs
+                      ? `/${params.docs}`
+                      : '',
                 (route?.startsWith('/blog/')
                   ? 'blog/'
                   : route?.startsWith('/careers/')
-                  ? 'careers/'
-                  : '') + params.path
+                    ? 'careers/'
+                    : '') + params.path
               ),
-              title: node.attributes.title
+              title: node.attributes.title,
             },
             node.transformChildren(config)
           );
-        }
+        },
       },
       image: {
         transform(node, config) {
@@ -85,55 +86,62 @@
               params.proj
                 ? `/za/${params.proj}`
                 : params.blog
-                ? `/${params.blog}`
-                : params.docs
-                ? `/${params.docs}`
-                : '',
+                  ? `/${params.blog}`
+                  : params.docs
+                    ? `/${params.docs}`
+                    : '',
               (route?.startsWith('/blog/')
                 ? 'blog/'
                 : route?.startsWith('/careers/')
-                ? 'careers/'
-                : '') + params.path
-            )
+                  ? 'careers/'
+                  : '') + params.path
+            ),
           });
-        }
+        },
       },
       fence: {
         attributes: {
           content: { type: String, render: false, required: true },
-          language: { type: String }
+          language: { type: String },
         },
         transform(node, config) {
           const attributes = node.transformAttributes(config);
           const children = [node.attributes.content.replace(/\n$/, '')];
           return new Tag('Codeblock', attributes, children);
-        }
+        },
       },
       table: {
         transform(node, config) {
           const attributes = node.transformAttributes(config);
           const children = node.transformChildren(config);
           return new Tag('Table', attributes, children);
-        }
-      }
+        },
+      },
     },
     tags: {
       embed: {
-        render: 'Embed'
+        render: 'Embed',
       },
       callout: {
-        render: 'Callout'
+        render: 'Callout',
       },
       time: {
-        render: 'Time'
+        render: 'Time',
       },
       command: {
-        render: 'CopyPasteCodeBlock'
+        render: 'CopyPasteCodeBlock',
       },
-      suggest_layout: {
-        render: 'SuggestLayout',
-      }
-    }
+    },
+  };
+
+  Object.keys(markdownComponents).forEach((key) => {
+    // @ts-ignore
+    markdoc_config.tags[key.toLowerCase()] = { render: key };
+  });
+
+  const components = {
+    ...baseMarkdownComponents,
+    ...markdownComponents,
   };
 
   let ast: Node;

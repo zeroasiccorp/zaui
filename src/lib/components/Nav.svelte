@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { icons } from '$lib/components';
+  import { icons } from '$lib/componentMaps';
   import { clsx } from 'clsx';
 
   // menu

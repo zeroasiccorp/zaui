@@ -17,7 +17,7 @@ export const GET: RequestHandler = async ({ fetch }) => {
   // return json(await res.json());
 
   let files: string[] = [];
-  let prefix = process.env.PUB_CONTENT_DIR ?? path.join(cwd, 'static/files');
+  let prefix = process.env.ZAUI_CONTENT_DIR ?? path.join(cwd, 'static/files');
   if (!fs.existsSync(prefix)) {
     console.log(`Content directory: '${prefix}' does not exist.`);
   } else {
