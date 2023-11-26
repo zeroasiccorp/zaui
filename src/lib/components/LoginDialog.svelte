@@ -5,13 +5,13 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
 
-  import appConfig from '$appconfig/pub.config'
+  import appConfig from '$appconfig/app.config'
   import { user, token, session, sessionLoaded, type Session, type Log } from '$lib/stores/session';
 
   import XIcon from '$lib/components/icons/X.svelte';
 
-  const authCientID = appConfig.auth?.clientID ?? '';
-  const authEndpoint = appConfig.auth?.endpoint ?? '';
+  const authCientID = appConfig.auth?.linkedIn?.clientID ?? '';
+  const authEndpoint = appConfig.endpoints?.auth ?? '';
 
   const loginDialog = createDialog({ label: 'Login' });
 

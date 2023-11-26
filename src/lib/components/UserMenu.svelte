@@ -13,7 +13,7 @@
 
   let appContext = getContext<App.AppContext>('appContext');
 
-  let actions: App.Action[];
+  let actions: App.MenuAction[];
   $: actions = [
     { text: 'Login', action: appContext.login ?? noop, disabled: $session?.authed },
     { text: 'Sign out', action: appContext.logout ?? noop, disabled: !$session?.authed },

@@ -36,7 +36,7 @@ import Workflow from '$lib/components/icons/Workflow.svelte';
 import X from '$lib/components/icons/X.svelte';
 import Zero from '$lib/components/icons/Zero.svelte';
 
-import appConfig from '$appconfig/pub.config';
+import appConfig from '$appconfig/app.config';
 let userLayoutComponents = appConfig.layoutComponents || {};
 let userIconComponents = appConfig.iconComponents || {};
 

@@ -9,7 +9,7 @@
   import { slide } from 'svelte/transition';
 
   // sessions and login
-  import appConfig from '$appconfig/pub.config';
+  import appConfig from '$appconfig/app.config';
   import LoginDialog from '$lib/components/LoginDialog.svelte';
   import UserMenu from '$lib/components/UserMenu.svelte';
 

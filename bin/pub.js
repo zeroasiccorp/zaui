@@ -42,7 +42,7 @@ let projectDir = path.resolve('.', process.argv[3] ?? process.env.PUB_PROJECT_DI
 // defaults to projectDir/src
 // override with PUB_SRC_DIR, resolved relative to projectDir
 // Optional:
-// - use pub.config.js or pub.config.ts for custom components
+// - use app.config.js or app.config.ts for custom components
 // - use tailwind.config.js (note: cjs - not esm) for tailwind config
 // - restart dev server after creating directory or renaming config file.
 let srcDir = path.resolve(projectDir, process.env.PUB_SRC_DIR ?? 'src');
@@ -53,8 +53,8 @@ if (!fs.existsSync(srcDir)) {
 let configDir = srcDir;
 if (
   !srcDir ||
-  (!fs.existsSync(path.join(srcDir, 'pub.config.js')) &&
-    !fs.existsSync(path.join(srcDir, 'pub.config.ts')))
+  (!fs.existsSync(path.join(srcDir, 'app.config.js')) &&
+    !fs.existsSync(path.join(srcDir, 'app.config.ts')))
 ) {
   configDir = undefined;
 }
@@ -113,6 +113,19 @@ let env = {
   PUB_STATIC_DIR: staticDir,
   PUB_PACKAGE_DIR: packageDir,
 };
+
+// Pass PUBLIC_* env vars for access via import from '$env/static/public'
+let userEnvFile = path.join(srcDir, '.env');
+if (fs.existsSync(userEnvFile)) {
+  fs.readFileSync(userEnvFile, { encoding: 'utf8' })
+    .split('\n')
+    .forEach((line) => {
+      let m = line.match(/^(PUBLIC_\w+)=(.*)$/);
+      if (m) {
+        env[m[1]] = process.env[m[1]] || m[2];
+      }
+    });
+}
 
 console.log(pkg.name, pkg.version, env);
 

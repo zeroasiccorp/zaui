@@ -11,32 +11,35 @@ declare global {
     interface AppConfig {
       layoutComponents?: ComponentMap;
       iconComponents?: ComponentMap;
+      endpoints?: {
+        auth?: string;
+      };
       auth?: {
         // only LinkedIn supported for now
         // see LoginDialog.svelte
-        clientID: string;
-        endpoint: string;
+        linkedIn?: {
+          clientID: string;
+        };
       };
     }
 
     // Clickable entries in the user menu
-    type Action = {
+    interface MenuAction {
       text: string;
       action: () => void;
-      disabled: boolean
-    };
+      disabled: boolean;
+    }
 
-    type AppContext = {
-      menuActions?: Action[];
+    interface AppContext {
+      menuActions?: MenuAction[];
       log?: (msg: string) => void;
       error?: (msg: string) => void;
       login?: () => void;
       loginWithLinkedIn?: () => void;
       logout?: () => void;
-    };
+    }
   }
 }
 
-export type ComponentMap = App.ComponentMap;
-export interface AppConfig extends App.AppConfig {}
-export interface AppContext extends App.AppContext {}
+// https://www.typescriptlang.org/docs/handbook/declaration-files/templates/global-modifying-module-d-ts.html
+export {};

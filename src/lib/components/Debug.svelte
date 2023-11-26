@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import appConfig from '$appconfig/pub.config';
+  import appConfig from '$appconfig/app.config';
 </script>
 
 <h2>appConfig.layoutComponents</h2>

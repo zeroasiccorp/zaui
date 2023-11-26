@@ -15,7 +15,7 @@ import pkg from '@markdoc/markdoc';
 const { parse } = pkg;
 
 import yaml from 'js-yaml';
-import appConfig from '$appconfig/pub.config';
+import appConfig from '$appconfig/app.config';
 
 export async function load(evt: LoadEvent) {
   let data: MarkdownFiles = get(model);

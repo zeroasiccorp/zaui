@@ -7,10 +7,15 @@ const config = {
 
   kit: {
     alias: {
-      // Similar to $lib but for appConfig
-      // Points to directory with custom components and pub.config.{js,ts}
+      // Points to directory with custom components
       // Results in path alias in .svelte-kit/tsconfig.json
-      $appconfig: process.env.PUB_APPCONFIG_DIR || 'src/appconfig',
+      $src: process.env.PUB_SRC_DIR || 'src',
+
+      // Points to directory with app.config.{js,ts}
+      // This is to avoid conditional imports while supporting optional custom config.
+      // Value is the same as $src only when an app.config.{js,ts} file is found.
+      // If $src has no custom app.config, the fallback src/app.config.js will be used.
+      $appconfig: process.env.PUB_APPCONFIG_DIR || 'src',
     },
     files: {
       // Points to directory with static assets

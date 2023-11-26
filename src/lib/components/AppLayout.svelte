@@ -13,11 +13,8 @@
   let pg: any;
   $: pg = content?.frontmatter;
 
-  let sc: boolean;
-  $: sc = config?.theme === 'SiliconCompiler';
-
-  let multicol: boolean;
-  $: multicol = pg?.multicol || $page.url.pathname.startsWith('/emulation');
+  let fullwidth: boolean;
+  $: fullwidth = !!pg?.fullwidth;
 
   // https://tailwindcss.com/docs/typography-plugin#element-modifiers
   const PROSE = clsx(
@@ -54,8 +51,17 @@
   </div>
 {/if}
 
-<div class="px-4 max-w-4xl mx-auto pt-8">
-  <div class={PROSE}>
-    <slot />
-  </div>
+
+<div class="">
+  {#if fullwidth}
+    <div class={PROSE}>
+      <slot />
+    </div>
+  {:else}
+    <div class="px-4 max-w-4xl mx-auto pt-8">
+      <div class={PROSE}>
+        <slot />
+      </div>
+    </div>
+  {/if}
 </div>
