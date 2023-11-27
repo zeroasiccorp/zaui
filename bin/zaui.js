@@ -128,14 +128,17 @@ if (fs.existsSync(userEnvFile)) {
     });
 }
 
-console.log(pkg.name, pkg.version, env);
+// console.log(pkg.name, pkg.version, env);
 
-// TODO: cleanup staticDir temp directory after child process exits
-child_process.execFileSync(viteFile, [viteCommand], {
-  cwd: packageDir,
-  stdio: 'inherit',
-  env: {
-    ...process.env,
-    ...env,
-  },
-});
+try {
+  child_process.execFileSync(viteFile, [viteCommand], {
+    cwd: packageDir,
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      ...env,
+    },
+  });
+} finally {
+  fs.rmSync(staticDir, { recursive: true });
+}
