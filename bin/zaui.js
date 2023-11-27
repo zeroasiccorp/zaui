@@ -70,31 +70,36 @@ if (!fs.existsSync(contentDir)) {
 
 // Create staticDir in temp directory
 let staticDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zaui-'));
-// symlink content -> contentDir
-fs.symlinkSync(contentDir, path.join(staticDir, 'files'));
+// add staticDir/files
+fs.mkdirSync(path.join(staticDir, 'files'));
+// symlink contentDir/* into staticDir/files (not including dotted)
+// NOTE: users should be warned that the contentDir is included in the build.
+overlayStaticDir(contentDir, path.join(staticDir, 'files'));
 // overlay symlinks -> srcDir/static/*
 if (srcDir) {
   let srcStaticDir = path.join(srcDir, 'static');
   if (fs.existsSync(srcStaticDir)) {
-    overlayStaticDir(srcStaticDir);
+    overlayStaticDir(srcStaticDir, staticDir);
   }
 }
 // overlay symlinks -> packageDir/static/*
-overlayStaticDir(path.join(packageDir, 'static'));
+overlayStaticDir(path.join(packageDir, 'static'), staticDir);
 
 // helper function to symlink files in targetDir into staticDir
-function overlayStaticDir(targetDir) {
+function overlayStaticDir(targetDir, staticDir) {
   if (fs.existsSync(targetDir)) {
-    fs.readdirSync(targetDir).forEach((file) => {
-      try {
-        // don't overwrite existing files
-        fs.symlinkSync(path.join(targetDir, file), path.join(staticDir, file));
-      } catch (e) {
-        if (e.code !== 'EEXIST') {
-          throw e;
+    fs.readdirSync(targetDir)
+      .filter((file) => !file.startsWith('.')) // avoid hidden
+      .forEach((file) => {
+        try {
+          // don't overwrite existing files
+          fs.symlinkSync(path.join(targetDir, file), path.join(staticDir, file));
+        } catch (e) {
+          if (e.code !== 'EEXIST') {
+            throw e;
+          }
         }
-      }
-    });
+      });
   }
 }
 
