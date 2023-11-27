@@ -1,7 +1,7 @@
 // app components
-import Nav from './components/Nav.svelte';
-import AppLayout from './components/AppLayout.svelte';
-import Footer from './components/Footer.svelte';
+// import Nav from './components/Nav.svelte';
+// import AppLayout from './components/AppLayout.svelte';
+// import Footer from './components/Footer.svelte';
 
 // layout components
 import Blog from './components/Blog.svelte';
@@ -34,9 +34,9 @@ let userIconComponents = appConfig.iconComponents || {};
 let userMarkdownComponents = appConfig.markdownComponents || {};
 
 export var appComponents: App.ComponentMap = {
-  Nav,
-  AppLayout,
-  Footer,
+  // Nav,
+  // AppLayout,
+  // Footer,
   ...userAppComponents,
 };
 
