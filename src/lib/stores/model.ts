@@ -23,8 +23,8 @@ export interface Navlink {
 export interface Config {
   theme?: string;
   preview?: boolean;
-  navlinks?: Array<Navlink>;    // main menu
-  docslinks?: Array<Navlink>;   // /docs sidebar
+  navlinks?: Array<Navlink>; // main menu
+  docslinks?: Array<Navlink>; // /docs sidebar
   actionlinks?: Array<Navlink>; // contact sales, etc.
   features?: Array<Navlink>;
   layout?: string;
@@ -40,7 +40,10 @@ export interface Config {
     imageclass?: string;
     text: string;
     imageonly?: boolean;
-  }
+  };
+  footer?: {
+    text: string;
+  };
 }
 
 export type MarkdownFiles = {

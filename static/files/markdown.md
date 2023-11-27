@@ -22,10 +22,10 @@
 2. item 3
 
 ### Inline formatting
-- relative link [./debug.md](./debug.md)
-- relative link [./debug](./debug)
-- relative link [debug.md](debug.md)
-- relative link [debug](debug)
+- relative link [./icons.md](./icons.md)
+- relative link [./icons](./icons)
+- relative link [icons.md](icons.md)
+- relative link [icons](icons)
 - relative link [../../](../../)
 - external link [https://docs.python.org/3/](https://docs.python.org/3/)
 - external link [//docs.python.org/3/](//docs.python.org/3/)

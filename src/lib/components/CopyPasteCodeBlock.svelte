@@ -6,7 +6,7 @@
   function copy() {
     navigator.clipboard.writeText(content?.textContent ?? '').then(() => {
       copyText = 'copied';
-      setInterval(() => {copyText = '(copy)'}, 500);
+      setTimeout(() => {copyText = '(copy)'}, 500);
     });
   }
 </script>

@@ -12,8 +12,9 @@ declare global {
     type ComponentMap = { [key: string]: ComponentType<SvelteComponent> };
 
     interface AppConfig {
-      layoutComponents?: ComponentMap;
+      appComponents?: ComponentMap;
       iconComponents?: ComponentMap;
+      layoutComponents?: ComponentMap;
       markdownComponents?: ComponentMap;
       endpoints?: {
         auth?: string;

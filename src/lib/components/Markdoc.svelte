@@ -11,7 +11,6 @@
 
   // Svelte components usable from markdown
   import Callout from '$lib/components/Callout.svelte';
-  import Time from '$lib/components/Time.svelte';
   import Codeblock from '$lib/components/Codeblock.svelte';
   import CopyPasteCodeBlock from '$lib/components/CopyPasteCodeBlock.svelte';
   import Table from '$lib/components/Table.svelte';
@@ -33,12 +32,9 @@
   export let content: MarkdownFile | null = null;
 
   let params = $page.params;
-  let route = $page.route.id;
-  let frontmatter = {};
 
   const baseMarkdownComponents = {
     Callout,
-    Time,
     Codeblock,
     Table,
     Embed,
@@ -55,22 +51,7 @@
           return new Tag(
             'a',
             {
-              href: fixlink(
-                node.attributes.href,
-                // TODO: try to simplify reconstructing the pageprefix from params
-                params.proj
-                  ? `/za/${params.proj}`
-                  : params.blog
-                    ? `/${params.blog}`
-                    : params.docs
-                      ? `/${params.docs}`
-                      : '',
-                (route?.startsWith('/blog/')
-                  ? 'blog/'
-                  : route?.startsWith('/careers/')
-                    ? 'careers/'
-                    : '') + params.path
-              ),
+              href: fixlink(node.attributes.href, '', params.path),
               title: node.attributes.title,
             },
             node.transformChildren(config)
@@ -81,21 +62,7 @@
         transform(node, config) {
           return new Tag('img', {
             ...node.transformAttributes(config),
-            src: fixlink(
-              node.attributes.src,
-              params.proj
-                ? `/za/${params.proj}`
-                : params.blog
-                  ? `/${params.blog}`
-                  : params.docs
-                    ? `/${params.docs}`
-                    : '',
-              (route?.startsWith('/blog/')
-                ? 'blog/'
-                : route?.startsWith('/careers/')
-                  ? 'careers/'
-                  : '') + params.path
-            ),
+            src: fixlink(node.attributes.src, '', params.path),
           });
         },
       },
@@ -124,9 +91,6 @@
       },
       callout: {
         render: 'Callout',
-      },
-      time: {
-        render: 'Time',
       },
       command: {
         render: 'CopyPasteCodeBlock',

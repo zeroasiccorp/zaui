@@ -2,7 +2,6 @@
 
 // CLI for zaui
 // Sets environment variables and launches vite dev/build/preview.
-// It would be nicer to invoke vite directly and pass config in memory.
 // TODO: add support for other npm scripts (e.g. check, test...)
 
 import child_process from 'node:child_process';
@@ -116,6 +115,7 @@ let env = {
 };
 
 // Pass PUBLIC_* env vars for access via import from '$env/static/public'
+// process.env vars take precedence over .env file
 let userEnvFile = path.join(srcDir, '.env');
 if (fs.existsSync(userEnvFile)) {
   fs.readFileSync(userEnvFile, { encoding: 'utf8' })
@@ -130,6 +130,7 @@ if (fs.existsSync(userEnvFile)) {
 
 console.log(pkg.name, pkg.version, env);
 
+// TODO: cleanup staticDir temp directory after child process exits
 child_process.execFileSync(viteFile, [viteCommand], {
   cwd: packageDir,
   stdio: 'inherit',

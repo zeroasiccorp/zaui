@@ -5,10 +5,10 @@ icon:
 navlinks:
   - href: /markdown
     text: markdown
-  - href: /debug
+  - href: /_debug
     text: debug
-  - href: /docs
-    text: docs
+  - href: /_icons
+    text: icons
 ---
 
 # Welcome to zaui

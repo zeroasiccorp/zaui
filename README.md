@@ -1,41 +1,47 @@
-# [WIP] zaui
-SvelteKit-powered toolchain for publishing websites from Markdown files.
+# zaui
+Npm-installable SvelteKit toolchain for building websites.
 
-The goal is to enable static site publishing possible with a minimum of boilerplate and configuration.
-
-A typical project contains just a package json, and a tree of markdown files.
+The goal is to enable static site publishing with a minimum of boilerplate and configuration.
 
 This library provides:
-- A preconfigured SvelteKit app with a Vite dev server and build
-- SvelteKit static adapter
-- Tailwind CSS, and the Tailwind typography plugin
+
+- A preconfigured [SvelteKit](https://kit.svelte.dev/docs/introduction) app with a [Vite](https://vitejs.dev/) dev server and build.
+- A set of built-in website navigation and page components.
+- Markdown rendering based on [Markdoc](https://github.com/markdoc/markdoc).
+- SvelteKit [static adapter](https://kit.svelte.dev/docs/adapter-static).
+- [Tailwind CSS](https://tailwindcss.com/docs/installation), and the [Tailwind typography](https://tailwindcss.com/docs/typography-plugin) plugin.
 - TypeScript
 
-Inspiration for the developer experience and implementation comes from [VitePress](https://vitepress.dev/). The main achitectural difference is that the UI can also fetch and render markdown dynamically in the browser, similar to [docsify](https://docsify.js.org/).
+In addition to the built-in components, you can add your own custom components.
 
-### Install
-{npm,pnpm,yarn} install -D @zeroasic/zaui
+The name 'zaui' originated from "Zero ASIC UI", where it powers the [zeroasic.com](https://www.zeroasic.com/) website. The [Chipmaker](https://www.zeroasic.com/emulation) part of the site uses custom components.
+
+Inspiration for the developer experience of zaui came from [VitePress](https://vitepress.dev/). The main achitectural difference is that zaui can fetch and render markdown dynamically in the browser, similar to [docsify](https://docsify.js.org/#/?id=what-it-is).
+
+### Installation
+Use npm, pnpm, or yarn. E.g.
+
+`npm install -D @zeroasic/zaui`
 
 ### Usage
-The built-in `zaui` command delegates to vite, which is installed as part SvelteKit bundled with this package.
+- `zaui dev` launches a dev server to render a preview of the website while you edit content.
+- `zaui build` produces a static build of the website files.
 
-`zaui command [project-root]`
+The zaui project directory can be passed as an argument E.g. `zaui dev docs` when your zaui project lives in the `docs` subdirectory of your repo.
 
-where command is one of
+For non-global installs, these commands should be added as package.json scripts E.g.
 
-- dev
-- build
-- preview
+```json
+  "scripts": {
+    "dev": "zaui dev",
+    "build": "zaui build"
+  }
+```
 
-`[project-root]` defaults to the current working directory
+### Directories
+You can override the default directories with env vars. More details in [zaui.js](bin/zaui.js)
 
-### MVP TODO
-- Document custom config, ts limitations
-- Package to initialize a project with `npm create zaui@latest`
-- zaui commands to run tests
-- Nice docs sidebar
-- head section: title, meta og header tags
-- Generated redirects
-- Generated sitemap.xml and robots.txt
-- In-page TOC and ids for markdown headers
-- Analytics
+- ZAUI_PROJECT_DIR defaults to current working directory, with other directories below that.
+- ZAUI_CONTENT_DIR is where markdown files live - defaults to `./content`
+- ZAUI_BUILD_DIR is where build output is written - defaults to  `./build`
+- ZAUI_SRC_DIR: is optional, where custom components live - defaults to `./src`

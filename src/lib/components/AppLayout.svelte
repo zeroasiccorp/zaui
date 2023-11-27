@@ -1,8 +1,10 @@
 <script lang="ts">
   import Nav from '$lib/components/Nav.svelte';
+  import Footer from '$lib/components/Footer.svelte';
+
   import clsx from 'clsx';
   import { fixlink } from '$lib/fixlink';
-  import { page } from '$app/stores';
+
   import type { Config, MarkdownFile } from '$lib/stores/model';
   import YamlError from '$lib/components/YamlError.svelte';
 
@@ -65,3 +67,5 @@
     </div>
   {/if}
 </div>
+
+<Footer {config} />

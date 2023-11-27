@@ -4,10 +4,7 @@
 import { PUBLIC_LINKEDIN_CLIENT_ID } from '$env/static/public';
 import { PUBLIC_AUTH_SERVER } from '$env/static/public';
 
-let appConfig: App.AppConfig = {
-  layoutComponents: {},
-  iconComponents: {},
-};
+let appConfig: App.AppConfig = {};
 
 if (PUBLIC_LINKEDIN_CLIENT_ID) {
   appConfig.auth = {

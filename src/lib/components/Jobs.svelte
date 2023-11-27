@@ -6,7 +6,7 @@
 
   export let content: MarkdownFile;
 
-  let jobfiles = $model?.files.filter((f) => f.startsWith('careers/') && !f.endsWith('/index.md'));
+  let jobfiles = $model?.files.filter((f) => f.startsWith('jobs/') && !f.endsWith('/index.md'));
   let jobs = jobfiles.map((f) => $model?.fileMap[f]).sort(compareMDFDates);
 </script>
 
