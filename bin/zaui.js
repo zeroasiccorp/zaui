@@ -121,16 +121,18 @@ let env = {
 
 // Pass PUBLIC_* env vars for access via import from '$env/static/public'
 // process.env vars take precedence over .env file
-let userEnvFile = path.join(srcDir, '.env');
-if (fs.existsSync(userEnvFile)) {
-  fs.readFileSync(userEnvFile, { encoding: 'utf8' })
-    .split('\n')
-    .forEach((line) => {
-      let m = line.match(/^(PUBLIC_\w+)=(.*)$/);
-      if (m) {
-        env[m[1]] = process.env[m[1]] || m[2];
-      }
-    });
+if (srcDir) {
+  let userEnvFile = path.join(srcDir, '.env');
+  if (fs.existsSync(userEnvFile)) {
+    fs.readFileSync(userEnvFile, { encoding: 'utf8' })
+      .split('\n')
+      .forEach((line) => {
+        let m = line.match(/^(PUBLIC_\w+)=(.*)$/);
+        if (m) {
+          env[m[1]] = process.env[m[1]] || m[2];
+        }
+      });
+  }
 }
 
 // console.log(pkg.name, pkg.version, env);

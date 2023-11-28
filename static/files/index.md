@@ -13,6 +13,19 @@ navlinks:
 
 # Welcome to zaui
 
-To get started, create an index.md file in the current directory, or pass the name of your content directory to zaui e.g `npm run zaui dev <dir>` or `pnpm zaui dev <dir>`
+To get started, create an `index.md` file in the `content` directory.
 
-You can always see this page by running zaui in an empty directory.
+You can link to another file called `foo.md` in the nav bar using yaml frontmatter.
+
+```yaml
+---
+# index.md
+icon:
+  image: 💥
+  text: zaui
+navlinks:
+  - href: /foo
+    text: Foo
+---
+```
+
