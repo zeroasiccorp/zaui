@@ -3,29 +3,26 @@ icon:
   image: 💥
   text: zaui
 navlinks:
-  - href: /markdown
-    text: markdown
-  - href: /_debug
-    text: debug
-  - href: /_icons
-    text: icons
+  - href: /README
+    text: README
 ---
 
 # Welcome to zaui
 
-To get started, create an `index.md` file in the `content` directory.
+To get started, create an `index.md` file in the `content` directory.  
+Link to other files in the nav bar using yaml frontmatter.
 
-You can link to another file called `foo.md` in the nav bar using yaml frontmatter.
+_index.md_
 
 ```yaml
 ---
-# index.md
 icon:
   image: 💥
   text: zaui
 navlinks:
-  - href: /foo
-    text: Foo
+  - href: /README
+    text: README
 ---
-```
 
+# Welcome to zaui
+```
