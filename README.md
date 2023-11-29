@@ -2,10 +2,9 @@
 The npm-installable SvelteKit toolchain.  
 Generate a website from markdown with a minimum of fuss.
 
-
-1. `npm install @zeroasic/zaui`
-2. `npm run zaui dev` -- type `o` to open your browser.
-4. `npm run zaui build`
+1. `pnpm install -S @zeroasic/zaui`
+2. `pnpm zaui dev`
+3. Type `o` to open your browser.
 
 ![zaui screenshot](images/zaui-screenshot.png)
 
