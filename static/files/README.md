@@ -1,5 +1,5 @@
 # zaui
-The npm-installable SvelteKit toolchain.  
+The npm-installable SvelteKit toolchain.
 Generate a website from markdown with a minimum of fuss.
 
 1. `pnpm install -S @zeroasic/zaui`
@@ -25,7 +25,7 @@ Generate a website from markdown with a minimum of fuss.
 
 ### Background
 
-The name 'zaui' originated from "Zero ASIC UI", where it powers the [zeroasic.com](https://www.zeroasic.com/) website. The [Chipmaker](https://www.zeroasic.com/emulation) part of the site uses custom components.
+The name 'zaui' originated from "Zero ASIC UI", where it powers the [zeroasic.com](https://www.zeroasic.com/) website.
 
 Inspiration for the developer experience of zaui came from [VitePress](https://vitepress.dev/). The main achitectural difference is that zaui can fetch and render markdown dynamically in the browser, similar to [docsify](https://docsify.js.org/#/?id=what-it-is).
 
