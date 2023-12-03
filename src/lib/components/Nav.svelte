@@ -7,10 +7,6 @@
   import MenuIcon from '$lib/components/icons/Menu.svelte';
   import XIcon from '$lib/components/icons/X.svelte';
   import { slide } from 'svelte/transition';
-
-  // sessions and login
-  import appConfig from '$appconfig/app.config';
-  import LoginDialog from '$lib/components/LoginDialog.svelte';
   import UserMenu from '$lib/components/UserMenu.svelte';
 
   import type { Config } from '$lib/stores/model';
@@ -36,10 +32,6 @@
     showNav = false;
   }
 </script>
-
-{#if appConfig.auth}
-  <LoginDialog />
-{/if}
 
 <nav
   class="sticky top-0 z-20 flex flex-row justify-between px-4 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black"
@@ -103,7 +95,7 @@
       {/each}
     </div>
     <div class="order-4">
-      {#if appConfig.auth}<UserMenu />{:else}&nbsp;{/if}
+      {#if config.usermenu}<UserMenu />{:else}&nbsp;{/if}
     </div>
   {/if}
 </nav>

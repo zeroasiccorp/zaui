@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Nav from '$lib/components/Nav.svelte';
-  import Footer from '$lib/components/Footer.svelte';
+  import { appComponents } from '$lib/componentMaps';
+
+  import LoginDialog from '$lib/components/LoginDialog.svelte';
 
   import clsx from 'clsx';
   import { fixlink } from '$lib/fixlink';
@@ -33,7 +34,9 @@
   <script src="/js/prism.js" defer></script>
 </svelte:head>
 
-<Nav {config} />
+<LoginDialog {config} />
+
+<svelte:component this={appComponents.Nav} {config} />
 
 <YamlError {content} />
 
@@ -45,10 +48,10 @@
     <h1
       class="text-balance text-5xl sm:text-6xl md:text-7xl max-w-screen-xl mx-auto tracking-wide backdrop-blur-sm"
     >
-      {pg.splash.title ?? ''}
+      {pg.splash.title ?? pg.title ?? ''}
     </h1>
     <p class="text-3xl sm:text-4xl max-w-screen-xl mx-auto leading-[1.5] backdrop-blur-sm mt-2">
-      {pg.splash.subtitle ?? ''}
+      {pg.splash.subtitle ?? pg.subtitle ?? ''}
     </p>
   </div>
 {/if}
@@ -68,4 +71,4 @@
   {/if}
 </div>
 
-<Footer {config} />
+<svelte:component this={appComponents.Footer} {config} />

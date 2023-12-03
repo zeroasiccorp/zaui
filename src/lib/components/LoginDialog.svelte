@@ -10,6 +10,9 @@
 
   import XIcon from '$lib/components/icons/X.svelte';
 
+  import type { Config } from '$lib/stores/model';
+  export let config: Config;
+
   const authCientID = appConfig.auth?.linkedIn?.clientID ?? '';
   const authEndpoint = appConfig.endpoints?.auth ?? '';
 
@@ -150,6 +153,7 @@
   appContext.login = login;
 </script>
 
+{#if config.usermenu}
 <div class="relative z-30">
   {#if $loginDialog.expanded}
     <div
@@ -168,7 +172,7 @@
           >
           <h3 class="text-2xl font-medium leading-6 text-gray-900">Login</h3>
           <div class="mt-4">
-            <p class="text-gray-700">To run your emulation, please sign in with LinkedIn.</p>
+            <p class="text-gray-700">{config.login?.intro ?? 'Please sign in with LinkedIn.'}</p>
           </div>
           <div class="mt-6">
             <button
@@ -177,8 +181,7 @@
               >Login with LinkedIn
             </button>
             <p class="mt-8 text-gray-700 text-sm">
-              Your LinkedIn account will be used for authentication purposes only. For full Zero
-              ASIC terms, see our
+              {config.login?.terms ?? 'Your LinkedIn account will be used for authentication purposes only. For more details, see our'}
               <a class="underline" on:click={loginDialog.close} href="/terms">Terms</a> and
               <a class="underline" on:click={loginDialog.close} href="/privacy">Privacy policy</a>.
             </p>
@@ -188,3 +191,4 @@
     </div>
   {/if}
 </div>
+{/if}

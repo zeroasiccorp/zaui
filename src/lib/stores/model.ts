@@ -27,6 +27,7 @@ export interface Config {
   docslinks?: Array<Navlink>; // /docs sidebar
   actionlinks?: Array<Navlink>; // contact sales, etc.
   features?: Array<Navlink>;
+  usermenu?: boolean;
   layout?: string;
   title?: string;
   sidebar?: boolean;
@@ -44,6 +45,10 @@ export interface Config {
   footer?: {
     text: string;
   };
+  login?: {
+    intro: string;
+    terms: string;
+  }
 }
 
 export type MarkdownFiles = {
