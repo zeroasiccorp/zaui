@@ -87,7 +87,7 @@
           )}
         >
           {#if link.icon}
-            <svelte:component this={icons[link.icon]} class="h-6 w-6 mb-1" />
+            <svelte:component this={icons[link.icon]} class="h-4 w-4 mb-1" />
           {:else}
             {link.text ?? link.href}
           {/if}
