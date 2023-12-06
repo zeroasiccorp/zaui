@@ -22,7 +22,7 @@ export async function load(evt: LoadEvent) {
   // data is undefined on first get()
   // TODO: self-initialize model store
   if (!data) {
-    data = { files: [], config: {}, fileMap: {}, status: '', appConfig };
+    data = { files: [], config: {}, fileMap: {}, submenuMap: {}, status: '', appConfig };
     model.set(data);
     let tstart = Date.now();
 
@@ -58,6 +58,15 @@ export async function load(evt: LoadEvent) {
           return true;
         });
       }
+
+      data.config.navlinks?.forEach((navlink) => {
+        if (navlink.submenu) {
+          navlink.submenu.text ??= navlink.text;
+          navlink.submenu.href ??= navlink.href;
+          data.submenuMap[navlink.submenu.href] = navlink.submenu;
+        }
+      });
+
       data.fileMap = fileMap;
       data.status = `${new Date().toISOString()} loaded ${loadlist.length} files (${
         Date.now() - tstart

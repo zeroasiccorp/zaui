@@ -18,6 +18,24 @@ export interface Navlink {
   markdown?: string;
   previewOnly?: boolean;
   darkShip?: boolean;
+  submenu?: Submenu;
+}
+
+// 2nd row under main menu, no sections
+// top-level href used for URL path prefix matching to show/hide submenu
+export interface Submenu extends Navlink {
+  links: Array<Navlink>;
+}
+
+export interface SidebarSection extends Navlink {
+  collapsed?: boolean;
+  links: Array<Navlink>;
+}
+
+// vertical sidebar with sections
+// top-level href used for URL path prefix matching to show/hide sidebar
+export interface Sidebar extends Navlink {
+  sections: Array<SidebarSection>;
 }
 
 export interface Config {
@@ -26,6 +44,7 @@ export interface Config {
   navlinks?: Array<Navlink>; // main menu
   docslinks?: Array<Navlink>; // /docs sidebar
   actionlinks?: Array<Navlink>; // contact sales, etc.
+  sidebars?: Array<Sidebar>;
   features?: Array<Navlink>;
   usermenu?: boolean;
   layout?: string;
@@ -55,6 +74,7 @@ export type MarkdownFiles = {
   config: Config;
   files: Array<string>;
   fileMap: { [key: string]: MarkdownFile };
+  submenuMap: { [key: string]: Submenu };
   status: string;
   appConfig: App.AppConfig;
 };

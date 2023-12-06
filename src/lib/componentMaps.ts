@@ -1,5 +1,7 @@
 // app components
 import Nav from './components/Nav.svelte';
+import Splash from './components/Splash.svelte';
+import Prose from './components/Prose.svelte';
 import Footer from './components/Footer.svelte';
 
 // layout components
@@ -10,6 +12,7 @@ import Debug from './components/Debug.svelte';
 import Default from './components/Default.svelte';
 import Doc from './components/Doc.svelte';
 import Docs from './components/Docs.svelte';
+import FeatureLinks from './components/FeatureLinks.svelte';
 import Icons from './components/Icons.svelte';
 import Job from './components/Job.svelte';
 import Jobs from './components/Jobs.svelte';
@@ -34,6 +37,8 @@ let userMarkdownComponents = appConfig.markdownComponents || {};
 
 export var appComponents: App.ComponentMap = {
   Nav,
+  Splash,
+  Prose,
   Footer,
   ...userAppComponents,
 };
@@ -47,6 +52,7 @@ export let layoutComponents: App.ComponentMap = {
   Default,
   Doc,
   Docs,
+  FeatureLinks,
   Icons,
   Job,
   Newsletter,

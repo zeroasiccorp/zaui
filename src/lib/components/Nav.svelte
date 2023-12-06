@@ -9,11 +9,17 @@
   import { slide } from 'svelte/transition';
   import UserMenu from '$lib/components/UserMenu.svelte';
 
-  import type { Config } from '$lib/stores/model';
+  import { model, type Config } from '$lib/stores/model';
   export let config: Config;
+
+  // TODO - make consistent - pass like config via props vs $page or $model
+  let submenuMap = $model?.submenuMap || {};
 
   let path: string;
   $: path = $page.url.pathname;
+
+  let pathprefix: string;
+  $: pathprefix = '/' + path.split('/')[1];
 
   let navlinks: typeof config.navlinks;
   $: navlinks = config?.navlinks?.filter((link) => !link.previewOnly || config?.preview);
@@ -82,8 +88,8 @@
           title={link.icon ? link.text ?? link.href : ''}
           class={clsx(
             'mb-2 mr-4 font-display text-sm dark:text-sky-400',
-            'border-b-2 border-transparent hover:border-orange-400',
-            path.startsWith(link.href) ? 'border-orange-400' : ''
+            'border-b-2 hover:border-orange-400',
+            path.startsWith(link.href) ? 'border-orange-400' : 'border-transparent'
           )}
         >
           {#if link.icon}
@@ -113,14 +119,14 @@
       >
         {link.text}</a
       >
-      {#if link.href === '/docs' && docslinks?.length}
-        {#each docslinks as link}
+      {#if link.submenu?.links}
+        {#each link.submenu.links as submenulink}
           <a
-            href={link.href}
+            href={submenulink.href}
             class="block py-[2px] px-10 m-[2px] hover:underline dark:text-sky-400 border-b dark:border-slate-800"
             on:click={toggleNav}
           >
-            {link.text}</a
+            {submenulink.text}</a
           >
         {/each}
       {/if}
@@ -128,33 +134,39 @@
   </nav>
 {/if}
 
-{#if path.startsWith('/docs') && docslinks}
+{#if submenuMap[pathprefix]}
+  {@const submenu = submenuMap[pathprefix]}
   <nav
-    class="sticky top-[47px] z-20 hidden md:flex flex-row items-end flex-wrap pl-[14px] pr-2 pt-1 gap-x-3 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black"
+    class="sticky top-[47px] h-8 hidden md:flex flex-row items-end flex-wrap pl-[14px] pr-2 gap-x-3 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black"
   >
     <a
-      href="/docs"
-      title="Chiplets"
+      href={submenu.href}
+      title={submenu.text}
       class={clsx(
-        'hover:underline pb-1 font-display',
-        path === '/docs'
-          ? 'font-semibold text-sky-500'
-          : 'text-slate-500 hover:text-sky-500 dark:text-slate-400'
+        'font-display text-sm border-b-2 border-transparent',
+        path === submenu.href
+          ? 'text-sky-500'
+          : 'text-slate-700 hover:text-sky-500 dark:text-slate-400'
       )}
     >
-      <svelte:component this={icons['CircuitBoard']} class="h-6 w-6" />
+      {#if submenu.icon && icons[submenu.icon]}
+        <svelte:component this={icons[submenu.icon]} class="h-6 mb-[2px]" />
+      {:else}
+        {submenu.text}:
+      {/if}
     </a>
-    {#each docslinks as link}
-      <a
-        href={link.href}
-        class={clsx(
-          'font-display text-sm dark:text-sky-400',
-          'border-b-2 border-transparent hover:border-orange-400',
-          path.startsWith(link.href) ? 'border-orange-400' : ''
-        )}
-      >
-        {link.text}
-      </a>
-    {/each}
+    {#if submenu.links}
+      {#each submenu.links as link}
+        <a
+          href={link.href}
+          class={clsx(
+            'font-display text-sm dark:text-sky-400 border-b-2 hover:border-orange-400',
+            path.startsWith(link.href) ? 'border-orange-400' : 'border-transparent'
+          )}
+        >
+          {link.text}
+        </a>
+      {/each}
+    {/if}
   </nav>
 {/if}

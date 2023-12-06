@@ -47,7 +47,7 @@
   </button>
   <div
     use:menu.items
-    class="z-50 absolute right-0 origin-top-right min-w-[200px] rounded border border-slate-300 dark:border-slate-600 divide-y divide-slate-300 dark:divide-slate-600 bg-white dark:bg-slate-900 shadow-lg {$menu.expanded
+    class="absolute right-0 origin-top-right min-w-[200px] rounded border border-slate-300 dark:border-slate-600 divide-y divide-slate-300 dark:divide-slate-600 bg-white dark:bg-slate-900 shadow-lg {$menu.expanded
       ? ''
       : 'hidden'}"
   >
