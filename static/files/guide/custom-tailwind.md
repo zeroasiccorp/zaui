@@ -1,3 +1,3 @@
-# Custom tailwind CSS
+# Custom Tailwind CSS
 
 _more details coming soon..._

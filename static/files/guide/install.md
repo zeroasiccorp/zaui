@@ -10,7 +10,7 @@ Use -D for `devDependencies``.
 
 Redistributing zaui as a dependency for redistribution in another npm package is not currently supported - but could be in the future ;-)
 
-### package.json
+## package.json
 
 For non-global installs, zaui commands should be added to your package.json scripts E.g.
 
@@ -23,16 +23,16 @@ For non-global installs, zaui commands should be added to your package.json scri
     "build": "zaui build"
   },
   "devDependencies": {
-    "@zeroasic/zaui": "^0.4.12"
+    "@zeroasic/zaui": "^0.4.13"
   }
 }
 ```
 
-### Custom components
+## Custom components
 
 There is no need to install or configure SvelteKit, since that is included with zaui.
 
-#### VS Code
+### VS Code
 
 The following VS Code extensions are recommended if you are developing custom components.
 
@@ -42,7 +42,7 @@ The following VS Code extensions are recommended if you are developing custom co
 
 You can also run [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) for faster error reporting, even though it can be a bit niggly.
 
-#### Tailwind
+### Tailwind
 
 For the Tailwind Intellisense plugin to work in your custom Svelte components, install the tailwind dependencies directly. [Tailwind docs](https://tailwindcss.com/docs/guides/sveltekit)
 

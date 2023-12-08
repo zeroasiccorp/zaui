@@ -21,7 +21,7 @@ navlinks:
 
 The icon.image can be an emoji or a reference to an image file.
 
-### Small screens
+## Small screens
 
 Navlinks will be collapsed behind a "hamburger" menu on small screens.
 
@@ -29,7 +29,7 @@ Navlinks will be collapsed behind a "hamburger" menu on small screens.
 
 ![sub-menu mobile screenshot](images/mobile-sub-menu.png)
 
-### Sub-menus
+## Sub-menus
 
 Nested `submenu` links will be expanded under the main menu bar. E.g.
 
