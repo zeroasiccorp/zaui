@@ -13,7 +13,7 @@ To get started, create an `index.md` file in the `content` directory.
 After creating the directory, quit and restart the zaui dev server to see your new content. While editing markdown, simply reload the page to see your updates.
 
 
-### Main menu
+## Main menu
 Link to other files in the nav bar using navlinks in the yaml frontmatter in `index.md`. E.g.
 
 _index.md_
@@ -31,7 +31,7 @@ navlinks:
 # Welcome to my zaui website
 ```
 
-### Blog content
+## Blog content
 
 _my-first-post.md_
 
