@@ -23,7 +23,7 @@ For non-global installs, zaui commands should be added to your package.json scri
     "build": "zaui build"
   },
   "devDependencies": {
-    "@zeroasic/zaui": "^0.4.13"
+    "@zeroasic/zaui": "^0.4.14"
   }
 }
 ```
