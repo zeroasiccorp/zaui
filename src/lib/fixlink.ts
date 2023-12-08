@@ -11,8 +11,8 @@ export function fixlink(href:string, pageprefix:string = '', path:string = '') {
   // default to file links e.g. to fetch images
   let prefix = '/files';
 
-  // treat extensionless and .md paths as page links
-  if (href.match(/(\/|^)[^.]+$|\.md$/i)) {
+  // treat extensionless and .. or / or .md paths as page links
+  if (href.match(/\.\.$|\/$|(\/|^)[^.]+$|\.md$/i)) {
     prefix = pageprefix;
   }
 
@@ -21,9 +21,11 @@ export function fixlink(href:string, pageprefix:string = '', path:string = '') {
     href = href.replace(/\.md$/i, '');
   }
 
-  // non-relative links are not adjusted to current page path
-  if (href.startsWith('/')) return prefix + href;
+  // non-relative links or un-prefixed links are left as-is
+  if (href.startsWith('/') || prefix === '') return prefix + href;
 
-  // relative links are adjusted to current page path
-  return (prefix ? prefix + '/' : '') + path.replace(/[^\/]*$/, '') + href;
+  // when there is a prefix, adjust relative link to current page path
+  let url = new URL(href, 'https://example.com/' + path);
+  // console.log('fixlink', path, href, '==>', prefix + url.pathname);
+  return prefix + url.pathname;
 }

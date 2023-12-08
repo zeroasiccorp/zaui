@@ -27,9 +27,10 @@ export interface Submenu extends Navlink {
   links: Array<Navlink>;
 }
 
-export interface SidebarSection extends Navlink {
-  collapsed?: boolean;
+export interface SidebarSection {
+  text: string;
   links: Array<Navlink>;
+  collapsed?: boolean;
 }
 
 // vertical sidebar with sections
@@ -39,6 +40,7 @@ export interface Sidebar extends Navlink {
 }
 
 export interface Config {
+  appurl?: string;
   theme?: string;
   preview?: boolean;
   navlinks?: Array<Navlink>; // main menu
@@ -75,6 +77,7 @@ export type MarkdownFiles = {
   files: Array<string>;
   fileMap: { [key: string]: MarkdownFile };
   submenuMap: { [key: string]: Submenu };
+  sidebarMap: { [key: string]: Sidebar };
   status: string;
   appConfig: App.AppConfig;
 };

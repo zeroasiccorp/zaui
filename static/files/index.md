@@ -3,33 +3,37 @@ icon:
   image: 💥
   text: zaui
 navlinks:
-  - text: README
-    href: /README
-
+  - text: Guide
+    href: /guide/quickstart
+  - text: Blog
+    href: /blog
+  - text: GitHub
+    href: https://github.com/zeroasiccorp/zaui
+    icon: GitHub
 sidebars:
   - text: Guide
     href: /guide
     sections:
-      - text: Start Here
-        href: /guide/getting-started
+      - text: Getting Started
         collapsed: false
         links:
+          - text: Quickstart
+            href: /guide/quickstart
           - text: Install
             href: /guide/install
           - text: Markdown
             href: /guide/markdown
-          - text: Main menu
-            href: /guide/menu
-          - text: Sub-menus
-            href: /guide/sub-menus
+          - text: Menus
+            href: /guide/menus
           - text: Blogging
             href: /guide/blogging
           - text: Built-in Layouts
             href: /guide/built-in-layouts
       - text: Customization
-        href: /guide/customization
         collapsed: true
         links:
+          - text: Custom config
+            href: /guide/custom-config
           - text: Tailwind
             href: /guide/custom-tailwind
           - text: Layouts
@@ -40,24 +44,12 @@ sidebars:
             href: /guide/custom-icons
           - text: Static files
             href: /guide/static-files
+splash:
+  image: images/station-clouds.jpg
+  title: Welcome to zaui
+  subtitle: The npm-installable SvelteKit toolchain.
 ---
 
-# Welcome to zaui
+#### Please see the [Quickstart Guide](/guide/quickstart) to get started.
 
-To get started, create an `index.md` file in the `content` directory.  
-Link to other files in the nav bar using yaml frontmatter.
-
-_index.md_
-
-```yaml
----
-icon:
-  image: 💥
-  text: zaui
-navlinks:
-  - href: /README
-    text: README
----
-
-# Welcome to zaui
-```
+[![Screenshot of quickstart guide](images/guide-dark.png)](/guide/quickstart)

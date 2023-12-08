@@ -1,4 +1,9 @@
 // https://medium.com/@ricciutipaolo/how-to-check-for-media-queries-in-svelte-with-usemediaquery-604f14190035
+// These stores should only be used with svelte conditional logic as a last resort
+// Where possible, it's preferable to use tailwind breakpoints
+// https://tailwindcss.com/docs/screens
+
+
 import { readable } from 'svelte/store';
 
 export const mediaquery = (mediaQueryString: string) => {
