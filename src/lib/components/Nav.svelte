@@ -6,11 +6,28 @@
   // menu
   import MenuIcon from '$lib/components/icons/Menu.svelte';
   import XIcon from '$lib/components/icons/X.svelte';
-  import { slide } from 'svelte/transition';
+  import { fade, slide } from 'svelte/transition';
   import UserMenu from '$lib/components/UserMenu.svelte';
+
+  // sidebar
+  import type { Sidebar } from '$lib/stores/model';
+  import { createDialog } from 'svelte-headlessui';
+  import { md } from '$lib/stores/mediaquery';
 
   import { model, type Config } from '$lib/stores/model';
   export let config: Config;
+
+  let sidebar: Sidebar;
+  $: sidebar = $page.data.sidebar;
+  const sidebarDialog = createDialog({ label: 'Sidebar' });
+
+  function toggleSidebar() {
+    if ($sidebarDialog.expanded) {
+      sidebarDialog.close();
+    } else {
+      sidebarDialog.open();
+    }
+  }
 
   // TODO - make consistent - pass like config via props vs $page or $model
   let submenuMap = $model?.submenuMap || {};
@@ -29,12 +46,14 @@
 
   let showNav: boolean = false;
   function toggleNav() {
+    sidebarDialog.close();
     showNav = !showNav;
     try {
       scrollTo(0, 0);
     } catch (e) {}
   }
   function hideNav() {
+    sidebarDialog.close();
     showNav = false;
   }
 </script>
@@ -169,4 +188,61 @@
       {/each}
     {/if}
   </nav>
+{/if}
+
+{#if sidebar}
+  {#if !$md}
+    <button
+      class="fixed top-16 right-4 z-20 p-2 rounded-full bg-orange-500 text-white shadow-lg hover:bg-orange-600"
+      on:click={toggleSidebar}
+    >
+      <span class="sr-only">Toggle sidebar</span>
+      <svelte:component
+        this={$sidebarDialog.expanded ? icons.X : icons.Menu}
+        class="h-6 w-6"
+        aria-hidden="true"
+      />
+    </button>
+  {/if}
+  {#if $md || $sidebarDialog.expanded}
+    <div class="relative z-10">
+      <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
+      <div
+        class="md:hidden fixed inset-0 opacity-70 bg-slate-200 dark:bg-slate-600 cursor-pointer"
+        transition:fade={{ duration: 200 }}
+        on:click={sidebarDialog.close}
+        aria-hidden="true"
+      />
+      <div
+        class="fixed inset-y-0 w-60 px-6 pt-12 overflow-y-auto bg-slate-50 dark:bg-slate-900 text-sm leading-6"
+        transition:slide={{ duration: 200, axis: 'x' }}
+      >
+        <nav class="pt-8">
+          {#each sidebar.sections as section}
+            <h2 class="font-display font-medium text-slate-900 dark:text-white">
+              {section.text}
+            </h2>
+            <ul class="my-4 border-l-2 border-slate-200 dark:border-slate-800">
+              {#each section.links as link}
+                <li class="relative">
+                  <a
+                    href={link.href}
+                    on:click={sidebarDialog.close}
+                    class={clsx(
+                      'block w-full pl-4 py-1 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 hover:font-semibold',
+                      path.startsWith(link.href)
+                        ? 'font-semibold text-orange-500'
+                        : 'text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300'
+                    )}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          {/each}
+        </nav>
+      </div>
+    </div>
+  {/if}
 {/if}

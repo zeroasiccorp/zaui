@@ -1,3 +1,11 @@
+# Markdown
+
+This library uses [Markdoc](https://markdoc.dev/docs/syntax) which supports the [Commonmark](https://commonmark.org/) Markdown specification.
+
+Images can stored together with the markdown, and referenced using relative links.
+
+See below for an example of rendered content. The source for this page can be viewed on [GitHub](https://github.com/zeroasiccorp/zaui/blob/main/static/files/guide/markdown.md?plain=1).
+
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -22,18 +30,14 @@
 2. item 3
 
 ### Inline formatting
-- relative link [./icons.md](./icons.md)
-- relative link [./icons](./icons)
-- relative link [icons.md](icons.md)
-- relative link [icons](icons)
-- relative link [../../](../../)
-- external link [https://docs.python.org/3/](https://docs.python.org/3/)
-- external link [//docs.python.org/3/](//docs.python.org/3/)
 - this is _italic_ inline
 - this is **bold** inline
 - this is _**bold and italic**_ inline
 - this is `code` inline
 - this is ~~strikethru~~ inline
+- relative link [./icons](./icons)
+- rooted link [/_debug](/_debug)
+- external link [https://docs.python.org/3/](https://docs.python.org/3/)
 
 ### Paragraph
 Things were not too simple in this _safari_ because things had changed very much in East Africa. The white hunter had been a close friend of mine for many years. I respected him as I had never respected my father and he trusted me, which was more than I deserved.
@@ -77,13 +81,10 @@ let config = {
       maxWidth: {
         '8xl': '88rem',
       },
-      screens: {
-        xs: '400px',
-      },
-    }
+    },
   },
   plugins: [require('@tailwindcss/typography')],
-}
+};
 ```
 
 ### Typescript code block

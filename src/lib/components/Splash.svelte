@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { page } from '$app/stores';
   import type { MarkdownFile } from '$lib/stores/model';
   import { fixlink } from '$lib/fixlink';
 
@@ -11,7 +12,7 @@
 {#if pg?.splash}
   <div
     class="text-center p-10 sm:p-20 text-slate-100 font-display font-extralight bg-cover"
-    style="background-image: url({fixlink(pg.splash.image || pg.splash)})"
+    style="background-image: url({fixlink(pg.splash.image || pg.splash, '', $page.params.path)})"
   >
     <h1
       class="text-balance text-5xl sm:text-6xl md:text-7xl max-w-screen-xl mx-auto tracking-wide backdrop-blur-sm"

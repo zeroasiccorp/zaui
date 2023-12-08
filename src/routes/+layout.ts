@@ -22,7 +22,7 @@ export async function load(evt: LoadEvent) {
   // data is undefined on first get()
   // TODO: self-initialize model store
   if (!data) {
-    data = { files: [], config: {}, fileMap: {}, submenuMap: {}, status: '', appConfig };
+    data = { files: [], config: {}, fileMap: {}, submenuMap: {}, sidebarMap: {}, status: '', appConfig };
     model.set(data);
     let tstart = Date.now();
 
@@ -67,6 +67,10 @@ export async function load(evt: LoadEvent) {
         }
       });
 
+      data.config.sidebars?.forEach((sidebar) => {
+          data.sidebarMap[sidebar.href] = sidebar;
+      });
+
       data.fileMap = fileMap;
       data.status = `${new Date().toISOString()} loaded ${loadlist.length} files (${
         Date.now() - tstart
@@ -84,18 +88,16 @@ export async function load(evt: LoadEvent) {
   }
 
   let path = evt.params.path || '';
+  let pathprefix = '/' + path.split('/')[0];
 
   let content = data.fileMap[path + '.md'] || data.fileMap[path ? path + '/index.md' : 'index.md'];
+  let sidebar = data.sidebarMap[pathprefix];
 
   let frontmatter = content?.frontmatter || {};
   let layout = layoutComponents[frontmatter.layout] || pathLayout(path);
 
-  // console.log('path layout for:', path, 'is:', layout);
-  // console.log('frontmatter.layout:', frontmatter.layout);
-  // console.log('pathLayout(path):', pathLayout(path))
-
   // content may be undefined if there is no md file - see [...path]/page.ts
-  return { content, frontmatter, layout, config: data.config };
+  return { content, frontmatter, layout, sidebar, config: data.config };
 }
 
 async function getMarkdown(filepath: string, evt: LoadEvent, prefix = '/files/') {

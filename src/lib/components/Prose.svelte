@@ -6,14 +6,8 @@
   // content may be undefined e.g. if this is a 404 page
   export let content: MarkdownFile;
 
-  let pg: any;
-  $: pg = content?.frontmatter;
-
-  let fullwidth: boolean;
-  $: fullwidth = !!pg?.fullwidth;
-
-  let showSidebar: boolean;
-  $: showSidebar = $page.url.pathname.startsWith('/docs');
+  $: fullwidth = content?.frontmatter?.fullwidth;
+  $: sidebar = $page.data.sidebar;
 
   // https://tailwindcss.com/docs/typography-plugin#element-modifiers
   const PROSE = clsx(
@@ -26,7 +20,7 @@
   );
 </script>
 
-<div class="{showSidebar ? 'lg:ml-72' : ''}">
+<div class="{sidebar ? 'md:ml-60' : ''}">
   <div class={clsx(fullwidth ? '' : 'px-4 max-w-4xl mx-auto pt-8')}>
     <div class={PROSE}>
       <slot />

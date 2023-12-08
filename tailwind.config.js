@@ -20,13 +20,14 @@ let config = {
       maxWidth: {
         '8xl': '88rem',
       },
-      screens: {
-        xs: '400px',
-      },
-    }
+    },
+    screens: {
+      xs: '400px',
+      ...defaultTheme.screens,
+    },
   },
   plugins: [require('@tailwindcss/typography')],
-}
+};
 
 // Merge user config from ZAUI_SRC_DIR if it exists
 // TODO: make sure that the typography plugin features are available
@@ -36,7 +37,7 @@ let config = {
 let srcDir = process.env.ZAUI_SRC_DIR;
 
 if (srcDir) {
-  content.push(path.join(srcDir, '**/*.{html,js,svelte,ts}'))
+  content.push(path.join(srcDir, '**/*.{html,js,svelte,ts}'));
 
   const configFile = path.join(srcDir, 'tailwind.config.js');
   if (fs.existsSync(configFile)) {

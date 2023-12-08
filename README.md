@@ -1,14 +1,13 @@
 # zaui
-The npm-installable SvelteKit toolchain.
 Generate a website from markdown with a minimum of fuss.
 
 1. `pnpm install -D @zeroasic/zaui`
 2. `pnpm zaui dev`
 3. Type `o` to open your browser.
 
-![zaui screenshot](images/zaui-screenshot.png)
+![zaui guide screenshot](/images/zaui-guide-screenshot-light.png)
 
-### This library provides``
+### This library provides
 
 - A preconfigured [SvelteKit](https://kit.svelte.dev/docs/introduction) app with a [Vite](https://vitejs.dev/) dev server and build.
 - [Tailwind CSS](https://tailwindcss.com/docs/installation), and the [Tailwind typography](https://tailwindcss.com/docs/typography-plugin) plugin.
