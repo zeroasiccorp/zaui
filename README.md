@@ -5,7 +5,7 @@ Generate a website from markdown with a minimum of fuss.
 2. `pnpm zaui dev`
 3. Type `o` to open your browser.
 
-![zaui-guide-screenshot-light](https://github.com/zeroasiccorp/zaui/assets/849592/43030f50-8dd0-4cc9-99df-2ca12a0c73f6)
+![Screenshot 2023-12-08 at 8 44 43 PM](https://github.com/zeroasiccorp/zaui/assets/849592/6e0c04c3-3abf-439a-afca-30cd16372f7b)
 
 ### This library provides
 
