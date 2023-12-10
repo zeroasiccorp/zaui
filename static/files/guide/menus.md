@@ -19,7 +19,7 @@ navlinks:
     icon: GitHub
 ```
 
-The icon.image can be an emoji or a reference to an image file.
+An `icon` can be described using simple string with an emoji (like 💥), or the name of an Icon component (like `GitHub`), or the url of an image file. An `icon` can also be a map with an `image` string value as above, or a literal `text` value, or both. Literal text is rendered using the `logo` font.
 
 ## Small screens
 

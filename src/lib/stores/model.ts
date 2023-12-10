@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import type { LoadData } from '$lib/loader';
 import type { Node } from '@markdoc/markdoc';
+import type { F, S } from 'vitest/dist/reporters-5f784f42';
 
 export interface MarkdownFile extends LoadData {
   filepath: string;
@@ -13,9 +14,10 @@ export interface MarkdownFile extends LoadData {
 export interface Navlink {
   href: string;
   text: string;
-  icon?: string;
+  icon?: Icon | string;
   image?: string;
   markdown?: string;
+  details?: string;
   previewOnly?: boolean;
   darkShip?: boolean;
   submenu?: Submenu;
@@ -39,9 +41,37 @@ export interface Sidebar extends Navlink {
   sections: Array<SidebarSection>;
 }
 
+export interface Icon {
+  image?: string;
+  class?: string;
+  text?: string;
+  imageonly?: boolean;
+}
+
+export interface Hero {
+  name: string;
+  text: string;
+  tagline?: string;
+  icon?: Icon | string;
+}
+
+export interface Splash {
+  image: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export interface Footer {
+  text: string;
+}
+
+export interface Login {
+  intro: string;
+  terms: string;
+}
+
 export interface Config {
   appurl?: string;
-  theme?: string;
   preview?: boolean;
   navlinks?: Array<Navlink>; // main menu
   docslinks?: Array<Navlink>; // /docs sidebar
@@ -51,25 +81,11 @@ export interface Config {
   usermenu?: boolean;
   layout?: string;
   title?: string;
-  sidebar?: boolean;
-  splash?: {
-    image: string;
-    title?: string;
-    subtitle?: string;
-  };
-  icon?: {
-    image?: string;
-    imageclass?: string;
-    text: string;
-    imageonly?: boolean;
-  };
-  footer?: {
-    text: string;
-  };
-  login?: {
-    intro: string;
-    terms: string;
-  }
+  splash?: Splash;
+  icon?: Icon | string;
+  hero?: Hero;
+  footer?: Footer;
+  login?: Login;
 }
 
 export type MarkdownFiles = {

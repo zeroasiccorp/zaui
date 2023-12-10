@@ -1,7 +1,7 @@
 {
   "name": "@zeroasic/zaui",
   "type": "module",
-  "version": "0.4.14",
+  "version": "0.5.0",
   "license": "MIT",
   "repository": {
     "type": "git",
