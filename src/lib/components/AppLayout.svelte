@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <script src="/js/prism.js" defer></script>
+  <script src="/prism.js" defer></script>
 </svelte:head>
 
 <LoginDialog {config} />

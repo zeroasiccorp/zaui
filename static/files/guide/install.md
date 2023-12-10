@@ -23,7 +23,7 @@ For non-global installs, zaui commands should be added to your package.json scri
     "build": "zaui build"
   },
   "devDependencies": {
-    "@zeroasic/zaui": "^0.4.14"
+    "@zeroasic/zaui": "^0.5.0"
   }
 }
 ```
@@ -43,9 +43,10 @@ The following VS Code extensions are recommended if you are developing custom co
 You can also run [Error Lens](https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens) for faster error reporting, even though it can be a bit niggly.
 
 ### Tailwind
-
-For the Tailwind Intellisense plugin to work in your custom Svelte components, install the tailwind dependencies directly. [Tailwind docs](https://tailwindcss.com/docs/guides/sveltekit)
+To use Tailwind VS Code Intellisense while developing custom components, you need [Tailwind dependencies](https://tailwindcss.com/docs/guides/sveltekit) in your project, and your own `tailwind.config.js` in the src directory.
 
 ```sh
 pnpm install -D tailwindcss postcss autoprefixer @tailwindcss/typography
 ```
+
+See [Custom Tailwind](custom-tailwind) for more details.

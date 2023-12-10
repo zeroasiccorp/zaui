@@ -2,20 +2,64 @@
 icon:
   image: 💥
   text: zaui
+
+hero:
+  name: zaui
+  text: SvelteKit powered static site generator
+  tagline: Generate a website from markdown with minimal fuss.
+  icon: 💥
+  actions:
+    - text: Quickstart
+      link: /guide/quickstart
+    - text: GitHub
+      link: https://github.com/zeroasiccorp/zaui
+
+fullwidth: true
+
+features:
+  - icon: 🍏
+    text: Markdown files become web pages
+    details: Easy to author, no Svelte knowledge required.
+    href: /guide/quickstart
+  - icon: 🍒
+    text: Customizable
+    details: Build your own Svelte layouts with TypeScript and Tailwind.
+    href: /guide/custom-components
+  - icon: 🍋
+    text: NPM Installable
+    details: Add docs to your project, no repo to copy.
+    href: /guide/quickstart
+  - icon: 🍇
+    text: Static Build
+    details: Deploy to edge.
+    href: /guide/build-and-deploy
+  - icon: 🥝
+    text: Menu and Sub-menus
+    details: Easy to configure links, hamburger for mobile.
+    href: /guide/menus
+  - icon: 🫐
+    text: Sidebars
+    details: Nice navigation for docs, works on mobile too.
+    href: /guide/sidebars
+  - icon: 🍎
+    text: Syntax highlighting for code blacks
+    details: Add your own prism languages.
+    href: /guide/static-files
+
 navlinks:
   - text: Guide
-    href: /guide/quickstart
+    href: /guide
   - text: Blog
     href: /blog
   - text: GitHub
     href: https://github.com/zeroasiccorp/zaui
     icon: GitHub
+
 sidebars:
   - text: Guide
     href: /guide
     sections:
       - text: Getting Started
-        collapsed: false
         links:
           - text: Quickstart
             href: /guide/quickstart
@@ -25,31 +69,21 @@ sidebars:
             href: /guide/markdown
           - text: Menus
             href: /guide/menus
+          - text: Sidebars
+            href: /guide/sidebars
           - text: Blogging
             href: /guide/blogging
+          - text: Build & Deploy
+            href: /guide/build-and-deploy
           - text: Built-in Layouts
             href: /guide/built-in-layouts
       - text: Customization
-        collapsed: true
         links:
-          - text: Custom config
-            href: /guide/custom-config
+          - text: Custom components
+            href: /guide/custom-components
           - text: Tailwind
             href: /guide/custom-tailwind
-          - text: Layouts
-            href: /guide/custom-layouts
-          - text: Markdown
-            href: /guide/custom-markdown
-          - text: Icons
-            href: /guide/custom-icons
           - text: Static files
             href: /guide/static-files
-splash:
-  image: images/station-clouds.jpg
-  title: Welcome to zaui
-  subtitle: The npm-installable SvelteKit toolchain.
 ---
 
-#### Please see the [Quickstart Guide](/guide/quickstart) to get started.
-
-[![Screenshot of quickstart guide](images/guide-dark.png)](/guide/quickstart)

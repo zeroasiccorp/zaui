@@ -1,3 +1,6 @@
-### Please see the [Quickstart Guide](/guide/quickstart) to get started.
+---
+layout: LandingPage
+fullwidth: true
+---
 
-[![Screenshot of quickstart guide](images/guide-dark.png)](/guide/quickstart)
+

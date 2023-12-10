@@ -1,5 +1,7 @@
 # Quickstart
 
+## Install
+
 The following should work in an empty or an existing project.
 
 1. `pnpm install -D @zeroasic/zaui`
@@ -8,15 +10,23 @@ The following should work in an empty or an existing project.
 
 If you don't already have a `content` directory you will see this zaui guide.
 
+## Add Markdown
+
 To get started, create an `index.md` file in the `content` directory.
 
-After creating the directory, quit and restart the zaui dev server to see your new content. While editing markdown, simply reload the page to see your updates.
+_After creating the content directory, quit and restart the zaui dev server_
 
+## Routing
 
-## Main menu
-Link to other files in the nav bar using navlinks in the yaml frontmatter in `index.md`. E.g.
+Zaui will serve pages for every file with a `.md` extension in the `content` directory.
 
-_index.md_
+Website URLs will match the names of your markdown files, minus the '.md' extension. For consistency, we suggest using lower case filenames with hyphens and no spaces or other special characters.
+
+A directory with an `index.md` file, will be served at a URL matching the directory name, with no trailing '/'.
+
+## Menu
+
+Add links to the main menu, by providing navlinks in the yaml frontmatter in `index.md`.
 
 ```yaml
 ---
@@ -31,19 +41,4 @@ navlinks:
 # Welcome to my zaui website
 ```
 
-## Blog content
-
-_my-first-post.md_
-
-```yaml
----
-title: My first post
-splash:
-  image: images/hello.jpg
-date: 2023-12-08
-excerpt: |
-  My first blog post using  [zaui](https://github.com/zeroasiccorp/zaui), the npm-installable SvelteKit toolchain to build websites from markdown with a minimum of fuss.
----
-
-## Hello World
-```
+See [Menus](menus) for more details.

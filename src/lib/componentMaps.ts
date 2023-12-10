@@ -3,6 +3,8 @@ import Nav from './components/Nav.svelte';
 import Splash from './components/Splash.svelte';
 import Prose from './components/Prose.svelte';
 import Footer from './components/Footer.svelte';
+import Hero from './components/Hero.svelte';
+import Features from './components/Features.svelte';
 
 // layout components
 import Blog from './components/Blog.svelte';
@@ -10,12 +12,11 @@ import BlogPost from './components/BlogPost.svelte';
 import Contact from './components/Contact.svelte';
 import Debug from './components/Debug.svelte';
 import Default from './components/Default.svelte';
-import Doc from './components/Doc.svelte';
-import Docs from './components/Docs.svelte';
 import FeatureLinks from './components/FeatureLinks.svelte';
 import Icons from './components/Icons.svelte';
 import Job from './components/Job.svelte';
 import Jobs from './components/Jobs.svelte';
+import LandingPage from './components/LandingPage.svelte';
 import Newsletter from './components/Newsletter.svelte';
 
 // icons
@@ -40,21 +41,22 @@ export var appComponents: App.ComponentMap = {
   Splash,
   Prose,
   Footer,
+  Hero,
+  Features,
   ...userAppComponents,
 };
 
 export let layoutComponents: App.ComponentMap = {
   Blog,
   BlogPost,
-  Jobs,
   Contact,
   Debug,
   Default,
-  Doc,
-  Docs,
   FeatureLinks,
   Icons,
   Job,
+  Jobs,
+  LandingPage,
   Newsletter,
   ...userLayoutComponents,
 };
@@ -79,15 +81,14 @@ export let markdownComponents: App.ComponentMap = {
 
 // default page layout component when frontmatter.layout is not set
 export function pathLayout(path: string) {
+  if (!path) return LandingPage;
   if (path === 'blog') return Blog;
   if (path === 'jobs') return Jobs;
-  if (path === 'docs') return Docs;
   if (path === '_debug') return Debug;
   if (path === '_icons') return Icons;
 
   if (path.startsWith('blog/')) return BlogPost;
   if (path.startsWith('jobs/')) return Job;
-  if (path.startsWith('docs/')) return Doc;
 
   return Default;
 }

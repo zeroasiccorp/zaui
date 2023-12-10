@@ -29,4 +29,4 @@ layout: Job
 - **Newsletter** - Newsletter signup form.
 
 ## Custom layouts
-See [custom layouts](custom-layouts) for details on how to create your own.
+See [custom components](custom-components) for details on how to create your own.

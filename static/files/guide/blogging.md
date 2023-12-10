@@ -4,13 +4,13 @@ Blog posts are authored in the content/blog directory. Each post should have a t
 
 ```yaml
 ---
-title: Hello zaui
+title: Zaui, our npm-installable SvelteKit toolchain
 author: Jürgen Leschner
 splash:
   image: images/daisy.jpg
-date: 2023-12-08
+date: 2023-12-09
 excerpt: |
-  We are thrilled to announce the open source release of [zaui](https://github.com/zeroasiccorp/zaui), our npm-installable SvelteKit toolchain to build websites from markdown with a minimum of fuss.
+  We are pleased to announce the open source release of [zaui](https://github.com/zeroasiccorp/zaui), our npm-installable SvelteKit toolchain for building websites from markdown.
 ---
 
 # Hello zaui
