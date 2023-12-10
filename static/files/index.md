@@ -32,7 +32,7 @@ features:
   - icon: 🍇
     text: Static Build
     details: Deploy to edge.
-    href: /guide/quickstart
+    href: /guide/build-and-deploy
   - icon: 🥝
     text: Menu and Sub-menus
     details: Easy to configure links, hamburger for mobile.
