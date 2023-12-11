@@ -7,7 +7,7 @@ Generate a website from markdown with a minimum of fuss.
 
 More details in the guide at [zaui.zeroasic.com](https://zaui.zeroasic.com/guide/quickstart).
 
-![Screenshot 2023-12-08 at 8 44 43 PM](https://github.com/zeroasiccorp/zaui/assets/849592/6e0c04c3-3abf-439a-afca-30cd16372f7b)
+![zaui](https://github.com/zeroasiccorp/zaui/assets/849592/3e1c7a87-6669-411a-b4f7-77d9a7462b50)
 
 ### This library provides
 
