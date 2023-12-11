@@ -1,6 +1,7 @@
 <script lang="ts">
   import { icons } from '$lib/componentMaps';
   import { clsx } from 'clsx';
+  import { fixlink } from '$lib/fixlink';
 
   type Icon = {
     image?: string;
@@ -19,15 +20,15 @@
 {#if ico.image}
   <!-- TODO: replace with https://github.com/mathiasbynens/emoji-regex -->
   {#if /\p{Emoji}/u.test(ico.image)}
-    <span class={clsx(cls, ico.class)}>{ico.image}</span>
+    <span class={ico.class || cls}>{ico.image}</span>
   {:else if Object.keys(icons).includes(ico.image)}
-    <svelte:component this={icons[ico.image]} class={clsx(cls, ico.class)} />
+    <svelte:component this={icons[ico.image]} class={ico.class || cls} />
   {:else}
-    <img src={ico.image} alt={ico.text ?? 'Icon'} class={clsx(cls, ico.class)} />
+    <img src={fixlink(ico.image)} alt={ico.text ?? 'Icon'} class={ico.class || cls} />
   {/if}
 {/if}
 {#if !ico.image || ico.text}
-  <span class={clsx('font-logo leading-none tracking-widest font-medium', cls, ico.class)}>
+  <span class={ico.class || cls}>
     {ico.text ?? ''}
   </span>
 {/if}

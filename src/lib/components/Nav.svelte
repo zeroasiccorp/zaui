@@ -69,7 +69,7 @@
       on:click={hideNav}
       class="order-2 pt-3 pb-2 border-b-2 border-transparent hover:border-orange-400"
     >
-      <NavIcon icon={config?.icon} class="text-2xl h-[24px]" />
+      <NavIcon icon={config?.icon} class="font-logo leading-none tracking-widest font-medium text-2xl h-[24px]" />
     </a>
     {#if navlinks?.length}
       <button
@@ -96,7 +96,7 @@
             )}
           >
             {#if link.icon}
-              <svelte:component this={icons[link.icon]} class="h-5 w-5 mb-1" />
+              <NavIcon icon={link.icon} class="h-5 w-5 mb-1" />
             {:else}
               {link.text ?? link.href}
             {/if}
@@ -124,8 +124,8 @@
             : 'text-slate-700 hover:text-sky-500 dark:text-slate-400'
         )}
       >
-        {#if submenu.icon && icons[submenu.icon]}
-          <svelte:component this={icons[submenu.icon]} class="h-6 mb-[2px]" />
+        {#if submenu.icon}
+          <NavIcon icon={submenu.icon} class="h-6 mb-[2px]" />
         {:else}
           {submenu.text}:
         {/if}
