@@ -5,7 +5,7 @@ Generate a website from markdown with a minimum of fuss.
 2. `pnpm zaui dev`
 3. Type `o` to open your browser.
 
-More details in the guide at [zaui.zeroasic.com](https://zaui.zeroasic.com/guide/quickstart).
+More details in the guide at [zaui.zeroasic.com](https://zaui.zeroasic.com/guide).
 
 ![zaui](https://github.com/zeroasiccorp/zaui/assets/849592/3e1c7a87-6669-411a-b4f7-77d9a7462b50)
 
