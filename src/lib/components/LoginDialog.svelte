@@ -5,7 +5,7 @@
   import { browser } from '$app/environment';
   import { page } from '$app/stores';
 
-  import appConfig from '$appconfig/app.config'
+  import appConfig from '$appconfig/app.config';
   import { user, token, session, sessionLoaded, type Session, type Log } from '$lib/stores/session';
 
   import XIcon from '$lib/components/icons/X.svelte';
@@ -13,6 +13,7 @@
   import type { Config } from '$lib/stores/model';
   export let config: Config;
 
+  const tracking = !!appConfig.auth;
   const authCientID = appConfig.auth?.linkedIn?.clientID ?? '';
   const authEndpoint = appConfig.endpoints?.auth ?? '';
 
@@ -36,7 +37,7 @@
         headers: {
           'x-za-session': jwt || '',
           'x-za-page': path || '',
-        }
+        },
       });
       const sn: Session = await resp.json();
       if (sn.authed) {
@@ -51,7 +52,9 @@
   }
 
   // Check for session on any full page load
-  onMount(getSession);
+  if (tracking) {
+    onMount(getSession);
+  }
 
   async function loginWithLinkedIn() {
     if (!$session?.sid) {
@@ -90,9 +93,9 @@
         method: 'POST',
         headers: {
           'x-za-session': $session?.jwt || '',
-          'x-za-page': path || ''
+          'x-za-page': path || '',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
     } catch (e) {
       error('saveSession ' + e);
@@ -115,19 +118,21 @@
 
   // track page navigation in the session log
   let currentPage = '';
-  page.subscribe((v: any) => {
-    let newPage = v?.url?.pathname || '';
-    if (browser && newPage && newPage !== currentPage) {
-      let oldPage = currentPage;
-      currentPage = newPage;
-      // avoid logging a nav right after the first get
-      // (for chrome) save on nav since detecting page reload is not reliable.
-      if (oldPage) {
-        log('nav');
-        saveSession();
+  if (tracking) {
+    page.subscribe((v: any) => {
+      let newPage = v?.url?.pathname || '';
+      if (browser && newPage && newPage !== currentPage) {
+        let oldPage = currentPage;
+        currentPage = newPage;
+        // avoid logging a nav right after the first get
+        // (for chrome) save on nav since detecting page reload is not reliable.
+        if (oldPage) {
+          log('nav');
+          saveSession();
+        }
       }
-    }
-  });
+    });
+  }
 
   // append a log entry to the end of session.log
   function log(msg: string) {
@@ -146,49 +151,53 @@
   }
 
   const appContext: App.AppContext = getContext('appContext');
-  appContext.log = log;
-  appContext.error = error;
-  appContext.loginWithLinkedIn = loginWithLinkedIn;
-  appContext.logout = logout;
-  appContext.login = login;
+  if (appContext && tracking) {
+    appContext.log = log;
+    appContext.error = error;
+    appContext.loginWithLinkedIn = loginWithLinkedIn;
+    appContext.logout = logout;
+    appContext.login = login;
+  }
 </script>
 
 {#if config.usermenu}
-<div class="relative z-30">
-  {#if $loginDialog.expanded}
-    <div
-      class="fixed inset-0 overflow-y-auto bg-slate-800/40 backdrop-blur-lg"
-      transition:scale={{ duration: 200, start: 0.9 }}
-    >
-      <div class="flex min-h-full items-center justify-center p-4 text-center">
-        <div
-          class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl"
-          use:loginDialog.modal
-        >
-          <button
-            class="absolute top-8 right-8 w-6 h-6 border rounded hover:bg-slate-600 hover:text-white"
-            on:click={loginDialog.close}
-            title="Close"><XIcon /></button
+  <div class="relative z-30">
+    {#if $loginDialog.expanded}
+      <div
+        class="fixed inset-0 overflow-y-auto bg-slate-800/40 backdrop-blur-lg"
+        transition:scale={{ duration: 200, start: 0.9 }}
+      >
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+          <div
+            class="relative w-full max-w-lg transform overflow-hidden rounded-2xl bg-white p-8 text-left align-middle shadow-xl"
+            use:loginDialog.modal
           >
-          <h3 class="text-2xl font-medium leading-6 text-gray-900">Login</h3>
-          <div class="mt-4">
-            <p class="text-gray-700">{config.login?.intro ?? 'Please sign in with LinkedIn.'}</p>
-          </div>
-          <div class="mt-6">
             <button
-              class="bg-sky-600 hover:bg-sky-500 shadow-md text-white font-semibold rounded py-2 px-4"
-              on:click={loginWithLinkedIn}
-              >Login with LinkedIn
-            </button>
-            <p class="mt-8 text-gray-700 text-sm">
-              {config.login?.terms ?? 'Your LinkedIn account will be used for authentication purposes only. For more details, see our'}
-              <a class="underline" on:click={loginDialog.close} href="/terms">Terms</a> and
-              <a class="underline" on:click={loginDialog.close} href="/privacy">Privacy policy</a>.
-            </p>
+              class="absolute top-8 right-8 w-6 h-6 border rounded hover:bg-slate-600 hover:text-white"
+              on:click={loginDialog.close}
+              title="Close"><XIcon /></button
+            >
+            <h3 class="text-2xl font-medium leading-6 text-gray-900">Login</h3>
+            <div class="mt-4">
+              <p class="text-gray-700">{config.login?.intro ?? 'Please sign in with LinkedIn.'}</p>
+            </div>
+            <div class="mt-6">
+              <button
+                class="bg-sky-600 hover:bg-sky-500 shadow-md text-white font-semibold rounded py-2 px-4"
+                on:click={loginWithLinkedIn}
+                >Login with LinkedIn
+              </button>
+              <p class="mt-8 text-gray-700 text-sm">
+                {config.login?.terms ??
+                  'Your LinkedIn account will be used for authentication purposes only. For more details, see our'}
+                <a class="underline" on:click={loginDialog.close} href="/terms">Terms</a> and
+                <a class="underline" on:click={loginDialog.close} href="/privacy">Privacy policy</a
+                >.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  {/if}
-</div>
+    {/if}
+  </div>
 {/if}
