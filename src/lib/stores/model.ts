@@ -83,6 +83,7 @@ export interface Config {
   title?: string;
   splash?: Splash;
   icon?: Icon | string;
+  favicon?: string;
   hero?: Hero;
   footer?: Footer;
   login?: Login;

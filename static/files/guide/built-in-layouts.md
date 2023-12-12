@@ -18,6 +18,7 @@ layout: Job
 - **Jobs** - Job postings list.
 - **Job** - Single job posting page.
 - **Team** - Team list with photos.
+- **LandingPage** - Hero and features
 
 ## Utility layouts
 - **Default** - The Default layout.

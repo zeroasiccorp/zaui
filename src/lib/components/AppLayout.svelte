@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { assets } from '$app/paths';
   import { appComponents } from '$lib/componentMaps';
-
+  import { fixlink } from '$lib/fixlink';
   import LoginDialog from '$lib/components/LoginDialog.svelte';
 
   import clsx from 'clsx';
@@ -16,6 +17,7 @@
 
 <svelte:head>
   <script src="/prism.js" defer></script>
+  <link rel="icon" href="{config?.favicon ? fixlink(config?.favicon) : assets + 'favicon.jpg' }" />
 </svelte:head>
 
 <LoginDialog {config} />

@@ -19,7 +19,16 @@ navlinks:
     icon: GitHub
 ```
 
-An `icon` can be described using simple string with an emoji (like 💥), or the name of an Icon component (like `GitHub`), or the url of an image file. An `icon` can also be a map with an `image` string value as above, or a literal `text` value, or both. Literal text is rendered using the `logo` font.
+### Icons
+
+An `icon` can be an emoji (like 💥), or the name of an Icon component (like `GitHub`), or the name of an image file. Instead of a string, an `icon` can also be a map (object) with an `image` string value as above, or a literal `text` value, or both. Literal text is rendered using the `logo` font.
+
+The map may also have a Tailwind `class` string value, e.g. to specify width and height of an image:
+```yaml
+icon:
+  image: images/siliconcompiler.webp
+  class: w-[304px] h-[83px] object-scale-down
+```
 
 ## Small screens
 

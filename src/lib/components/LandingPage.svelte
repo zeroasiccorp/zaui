@@ -1,7 +1,6 @@
 <script lang="ts">
   // LandingPage with optional hero and features sections
   // NOTE: hero looks best with fullwidth:true
-  // TODO: extract hero and features into customizable appComponents
 
   import { page } from '$app/stores';
   import type { Config, MarkdownFile } from '$lib/stores/model';

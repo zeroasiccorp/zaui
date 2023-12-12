@@ -1,10 +1,16 @@
----
-icon:
-  image: 💥
-  text: zaui
 
-favicon: images/favicon.png
+# Landing Page
 
+The landing page design was inspired by [VitePress](https://vitepress.dev/) -- thank you Evan -- with a Hero section at the top and Feature boxes below that.
+
+Use `hero` and `features` in your index.md frontmatter to configure each section. Icon configuration follows the same pattern as in the [menus](menus). Note that `hero` looks best combined with `fullwidth: true`, which allows the layout to take up the full width of the window, with no padding or margins.
+
+Example from [here](https://github.com/zeroasiccorp/zaui/blob/main/static/files/index.md?plain=1). 
+![Landing page screenshot](images/landing-page.png)
+
+### index.md
+
+```yaml
 hero:
   name: zaui
   text: SvelteKit powered static site generator
@@ -47,47 +53,4 @@ features:
     text: Syntax highlighting for code blacks
     details: Add your own prism languages.
     href: /guide/static-files
-
-navlinks:
-  - text: Guide
-    href: /guide
-  - text: Blog
-    href: /blog
-  - text: GitHub
-    href: https://github.com/zeroasiccorp/zaui
-    icon: GitHub
-
-sidebars:
-  - text: Guide
-    href: /guide
-    sections:
-      - text: Getting Started
-        links:
-          - text: Quickstart
-            href: /guide/quickstart
-          - text: Install
-            href: /guide/install
-          - text: Markdown
-            href: /guide/markdown
-          - text: Menus
-            href: /guide/menus
-          - text: Sidebars
-            href: /guide/sidebars
-          - text: Landing page
-            href: /guide/landing-page
-          - text: Blogging
-            href: /guide/blogging
-          - text: Build & Deploy
-            href: /guide/build-and-deploy
-          - text: Built-in Layouts
-            href: /guide/built-in-layouts
-      - text: Customization
-        links:
-          - text: Custom components
-            href: /guide/custom-components
-          - text: Tailwind
-            href: /guide/custom-tailwind
-          - text: Static files
-            href: /guide/static-files
----
-
+```

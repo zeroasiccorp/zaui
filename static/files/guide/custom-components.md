@@ -24,6 +24,7 @@ Custom components can replace any of the following component types.
   - `Jobs`
   - `Contact`
   - `Newsletter`
+  - `Team`
 
 3. **markdownComponents**  
   Markdown components can be used from within markdown content. Detais coming soon.
