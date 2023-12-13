@@ -1,3 +1,7 @@
+---
+title: Zaui Install
+---
+
 # Install
 
 Use npm, pnpm, or yarn. E.g.

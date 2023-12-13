@@ -71,7 +71,7 @@ export interface Login {
 }
 
 export interface Config {
-  appurl?: string;
+  appurl?: string; // e.g. https://jldec.me
   preview?: boolean;
   navlinks?: Array<Navlink>; // main menu
   docslinks?: Array<Navlink>; // /docs sidebar
@@ -87,6 +87,7 @@ export interface Config {
   hero?: Hero;
   footer?: Footer;
   login?: Login;
+  twitter?: string; // e.g. @jldec
 }
 
 export type MarkdownFiles = {

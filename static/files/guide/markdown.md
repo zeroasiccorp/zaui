@@ -1,3 +1,7 @@
+---
+title: Zaui Markdown
+---
+
 # Markdown
 
 This library uses [Markdoc](https://markdoc.dev/docs/syntax) which supports the [Commonmark](https://commonmark.org/) Markdown specification.

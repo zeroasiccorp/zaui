@@ -1,3 +1,7 @@
+---
+title: Zaui Custom Components
+---
+
 # Custom configuration
 
 The `src` directory holds custom configuration and components as well as [static files](static-files).

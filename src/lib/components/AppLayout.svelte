@@ -4,8 +4,6 @@
   import { fixlink } from '$lib/fixlink';
   import LoginDialog from '$lib/components/LoginDialog.svelte';
 
-  import clsx from 'clsx';
-
   import type { Config, MarkdownFile } from '$lib/stores/model';
   import YamlError from '$lib/components/YamlError.svelte';
 
@@ -26,7 +24,7 @@
 
 <YamlError {content} />
 
-<svelte:component this={appComponents.Splash} {content} />
+<svelte:component this={appComponents.Splash} />
 
 <svelte:component this={appComponents.Prose} {content}>
   <slot />

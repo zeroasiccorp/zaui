@@ -1,3 +1,7 @@
+---
+title: Zaui Menus
+---
+
 # Menu configuration
 
 Links and icons in the main menu are configured in the frontmatter of `index.md`. E.g.

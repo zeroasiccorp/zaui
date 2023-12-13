@@ -1,3 +1,6 @@
+---
+title: Zaui Landing Page
+---
 
 # Landing Page
 
