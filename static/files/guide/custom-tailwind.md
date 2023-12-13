@@ -1,3 +1,7 @@
+---
+title: Zaui Custom Tailwind CSS
+---
+
 # Custom Tailwind CSS
 To use Tailwind VS Code Intellisense, your project needs [Tailwind dependencies](https://tailwindcss.com/docs/guides/sveltekit).
 

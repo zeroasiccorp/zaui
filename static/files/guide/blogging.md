@@ -1,3 +1,7 @@
+---
+title: Zaui Blogging
+---
+
 # Blogging
 
 Blog posts are authored in the content/blog directory. Each post should have a title and `yyyy-mm-dd` date in the frontmatter. Splash image, author, and excerpt are optional.

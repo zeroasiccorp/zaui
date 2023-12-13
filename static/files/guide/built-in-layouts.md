@@ -1,3 +1,7 @@
+---
+title: Zaui Built-in Layouts
+---
+
 # Layouts
 
 The `Default` layout template produces a simple, single-column markdown-driven HTML page layout, with an optional splash image at the top.

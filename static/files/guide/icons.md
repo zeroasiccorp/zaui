@@ -1,4 +1,5 @@
 ---
+title: Zaui Icons
 layout: Icons
 ---
 

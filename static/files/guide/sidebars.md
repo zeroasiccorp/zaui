@@ -1,3 +1,7 @@
+---
+title: Zaui Sidebars
+---
+
 # Sidebars
 
 Sidebar navigation is configured in `sidebars` in your index.md frontmatter.

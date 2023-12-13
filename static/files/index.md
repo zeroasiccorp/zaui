@@ -1,4 +1,6 @@
 ---
+appurl: https://zaui.zeroasic.com
+
 icon:
   image: 💥
   text: zaui

@@ -1,3 +1,7 @@
+---
+title: Zaui Quickstart
+---
+
 # Quickstart
 
 ## Install

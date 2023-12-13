@@ -1,3 +1,7 @@
+---
+title: Zaui Build and Deploy
+---
+
 # Build and Deploy
 
 `zaui build` runs a SvelteKit / Vite static build, pushing output files into the `build` directory.

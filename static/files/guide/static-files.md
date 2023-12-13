@@ -1,3 +1,7 @@
+---
+title: Zaui Static Files
+---
+
 # Static files
 
 All files and directories in 'src/static' will be copied straight into the root of the output build.
