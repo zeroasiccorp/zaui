@@ -36,15 +36,15 @@ icon:
 
 ## Small screens
 
-Navlinks will be collapsed behind a "hamburger" menu on small screens.
+Navlinks will be collapsed behind a "hamburger" menu on small screens. To turn this off, set `mobilemenu: false`.
 
-![sub-menu mobile screenshot](images/mobile-menu.png)
+![mobile menu collapsed screenshot](images/mobile-menu.png)
 
-![sub-menu mobile screenshot](images/mobile-sub-menu.png)
+![mobile menu expanded screenshot](images/mobile-sub-menu.png)
 
 ## Sub-menus
 
-Nested `submenu` links will be expanded under the main menu bar. E.g.
+Nested `submenu` links will be expanded horizontally under the main menu bar. E.g.
 
 ![sub-menu mobile screenshot](images/sub-menu.png)
 

@@ -78,7 +78,8 @@ export interface Config {
   actionlinks?: Array<Navlink>; // contact sales, etc.
   sidebars?: Array<Sidebar>;
   features?: Array<Navlink>;
-  usermenu?: boolean;
+  usermenu?: boolean; // default = false
+  mobilemenu?: boolean; // default = true
   layout?: string;
   title?: string;
   splash?: Splash;

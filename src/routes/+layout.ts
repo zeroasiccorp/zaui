@@ -71,6 +71,9 @@ export async function load(evt: LoadEvent) {
           data.sidebarMap[sidebar.href] = sidebar;
       });
 
+      data.config.usermenu ??= false;
+      data.config.mobilemenu ??= true;
+
       data.fileMap = fileMap;
       data.status = `${new Date().toISOString()} loaded ${loadlist.length} files (${
         Date.now() - tstart
