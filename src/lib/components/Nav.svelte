@@ -20,7 +20,7 @@
 
   let sidebar: Sidebar;
   $: sidebar = $page.data.sidebar;
-  const sidebarDialog = createDialog({ label: 'Sidebar' });
+  const sidebarDialog = createDialog({ label: 'Sidebar', expanded: true, opened: true });
 
   function toggleSidebar() {
     if ($sidebarDialog.expanded) {
