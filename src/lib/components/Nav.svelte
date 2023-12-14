@@ -16,11 +16,11 @@
   import { md } from '$lib/stores/mediaquery';
 
   import { model, type Config } from '$lib/stores/model';
-  export let config: Config;
+  export let config: Config = {};
 
   let sidebar: Sidebar;
   $: sidebar = $page.data.sidebar;
-  const sidebarDialog = createDialog({ label: 'Sidebar' });
+  const sidebarDialog = createDialog({ label: 'Sidebar', expanded: true, opened: true });
 
   function toggleSidebar() {
     if ($sidebarDialog.expanded) {
@@ -40,10 +40,10 @@
   $: pathprefix = '/' + path.split('/')[1];
 
   let navlinks: typeof config.navlinks;
-  $: navlinks = config?.navlinks?.filter((link) => !link.previewOnly || config?.preview);
+  $: navlinks = config.navlinks?.filter((link) => !link.previewOnly || config.preview);
 
   let docslinks: typeof config.docslinks;
-  $: docslinks = config?.docslinks?.filter((link) => !link.previewOnly || config?.preview);
+  $: docslinks = config.docslinks?.filter((link) => !link.previewOnly || config.preview);
 
   let showNav: boolean = false;
   function toggleNav() {
@@ -69,28 +69,31 @@
       on:click={hideNav}
       class="order-2 pt-3 pb-2 border-b-2 border-transparent hover:border-orange-400"
     >
-      <NavIcon icon={config?.icon} class="font-logo leading-none tracking-widest font-medium text-2xl h-[24px]" />
+      <NavIcon icon={config.icon} class="font-logo leading-none tracking-widest font-medium text-2xl h-[24px]" />
     </a>
     {#if navlinks?.length}
-      <button
-        title="Toggle main menu"
-        on:click={toggleNav}
-        aria-label="Menu"
-        class="md:hidden order-1 mt-2 pb-1 border-b-2 border-transparent hover:border-orange-400"
-      >
-        {#if showNav}
-          <Close class="w-8 h-8" />
-        {:else}
-          <Open class="w-8 h-8" />
-        {/if}
-      </button>
-      <div class="hidden md:flex order-3 flex-grow justify-end items-end">
+      {#if config.mobilemenu}
+        <button
+          title="Toggle main menu"
+          on:click={toggleNav}
+          aria-label="Menu"
+          class="md:hidden order-1 mt-2 pb-1 border-b-2 border-transparent hover:border-orange-400"
+        >
+          {#if showNav}
+            <Close class="w-8 h-8" />
+          {:else}
+            <Open class="w-8 h-8" />
+          {/if}
+        </button>
+      {/if}
+
+      <div class={clsx((config.mobilemenu ? 'hidden md:flex' : 'flex'), 'order-3 flex-grow justify-end items-end')}>
         {#each navlinks as link}
           <a
             href={link.href}
             title={link.icon ? link.text ?? link.href : ''}
             class={clsx(
-              'mb-2 mr-4 font-display text-sm dark:text-sky-400',
+              'mb-2 ml-4 font-display text-sm text-slate-600 hover:text-slate-900 dark:text-sky-500 dark:hover:text-sky-400',
               'border-b-2 hover:border-orange-400',
               path.startsWith(link.href) ? 'border-orange-400' : 'border-transparent'
             )}
@@ -103,9 +106,11 @@
           </a>
         {/each}
       </div>
-      <div class="order-4">
-        {#if config.usermenu}<UserMenu />{:else}&nbsp;{/if}
-      </div>
+      {#if config.usermenu}
+        <div class="order-4 ml-4">
+          <UserMenu />
+        </div>
+      {/if}
     {/if}
   </div>
 
@@ -147,7 +152,7 @@
   {/if}
 </nav>
 
-{#if showNav && navlinks?.length}
+{#if config.usermenu && showNav && navlinks?.length}
   <nav
     transition:slide
     class="flex flex-col font-display leading-8 bg-slate-50 dark:text-slate-200 dark:bg-slate-900"

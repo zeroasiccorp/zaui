@@ -5,6 +5,8 @@ icon:
   image: 💥
   text: zaui
 
+mobilemenu: false
+
 favicon: images/favicon.png
 
 hero:
