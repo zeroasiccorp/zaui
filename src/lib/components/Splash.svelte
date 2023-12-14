@@ -9,7 +9,7 @@
   $: pg = $page.data.frontmatter ?? {};
   $: splash = pg.splash ?? {};
   $: splashlink = splash.image ? fixlink(splash.image, '', $page.params.path) : '';
-  $: title = splash.title || pg.title || config.hero?.name || '';
+  $: title = splash.title || pg.title || config.title || config.hero?.name || '';
   $: subtitle = splash.subtitle || pg.subtitle || pg.description || '';
 </script>
 
