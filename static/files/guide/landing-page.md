@@ -1,5 +1,5 @@
 ---
-title: Zaui Landing Page
+title: Landing Page
 ---
 
 # Landing Page

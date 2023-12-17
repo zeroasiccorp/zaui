@@ -1,12 +1,14 @@
 ---
 title: Zaui, our npm-installable SvelteKit toolchain
-author: Jürgen Leschner
+author: jldec
 splash:
   image: images/daisy.jpg
 date: 2023-12-10
 excerpt: |
   We are pleased to announce the open source release of [zaui](https://github.com/zeroasiccorp/zaui), our npm-installable SvelteKit toolchain for building websites from markdown.
 ---
+
+# Zaui, our npm-installable SvelteKit toolchain
 
 _Originally published at [https://www.zeroasic.com/blog/zaui-release](https://www.zeroasic.com/blog/zaui-release)._
 

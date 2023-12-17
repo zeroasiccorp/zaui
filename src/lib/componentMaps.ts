@@ -7,24 +7,29 @@ import Hero from './components/Hero.svelte';
 import Features from './components/Features.svelte';
 
 // layout components
-import Blog from './components/Blog.svelte';
-import BlogPost from './components/BlogPost.svelte';
 import Contact from './components/Contact.svelte';
 import Debug from './components/Debug.svelte';
 import Default from './components/Default.svelte';
 import FeatureLinks from './components/FeatureLinks.svelte';
 import Icons from './components/Icons.svelte';
-import Job from './components/Job.svelte';
-import Jobs from './components/Jobs.svelte';
 import LandingPage from './components/LandingPage.svelte';
 import Newsletter from './components/Newsletter.svelte';
+import PageList from './components/PageList.svelte';
+import Post from './components/Post.svelte';
+import Posts from './components/Posts.svelte';
 
 // icons
+import AlertCircle from './components/icons/Info.svelte';
+import AlertOctagon from './components/icons/AlertOctagon.svelte';
+import AlertTriangle from './components/icons/AlertTriangle.svelte';
 import ArrowLeft from './components/icons/ArrowLeft.svelte';
 import GitHub from './components/icons/GitHub.svelte';
 import Home from './components/icons/Home.svelte';
+import Info from './components/icons/Info.svelte';
+import Lightbulb from './components/icons/Lightbulb.svelte';
 import LinkedIn from './components/icons/LinkedIn.svelte';
 import Menu from './components/icons/Menu.svelte';
+import MessageSquareWarning from './components/icons/MessageSquareWarning.svelte';
 import User from './components/icons/User.svelte';
 import UserCheck from './components/icons/UserCheck.svelte';
 import Users from './components/icons/Users.svelte';
@@ -47,27 +52,32 @@ export var appComponents: App.ComponentMap = {
 };
 
 export let layoutComponents: App.ComponentMap = {
-  Blog,
-  BlogPost,
   Contact,
   Debug,
   Default,
   FeatureLinks,
   Icons,
-  Job,
-  Jobs,
   LandingPage,
   Newsletter,
+  PageList,
+  Post,
+  Posts,
   ...userLayoutComponents,
 };
 
 // Keys in this map can be navlinks icon values in root frontmatter config
 export let icons: App.ComponentMap = {
+  AlertCircle,
+  AlertOctagon,
+  AlertTriangle,
   ArrowLeft,
   GitHub,
   Home,
+  Info,
+  Lightbulb,
   LinkedIn,
   Menu,
+  MessageSquareWarning,
   User,
   UserCheck,
   Users,
@@ -79,16 +89,3 @@ export let markdownComponents: App.ComponentMap = {
   ...userMarkdownComponents
 };
 
-// default page layout component when frontmatter.layout is not set
-export function pathLayout(path: string) {
-  if (!path) return LandingPage;
-  if (path === 'blog') return Blog;
-  if (path === 'jobs') return Jobs;
-  if (path === '_debug') return Debug;
-  if (path === '_icons') return Icons;
-
-  if (path.startsWith('blog/')) return BlogPost;
-  if (path.startsWith('jobs/')) return Job;
-
-  return Default;
-}

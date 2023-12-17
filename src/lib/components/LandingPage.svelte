@@ -3,12 +3,9 @@
   // NOTE: hero looks best with fullwidth:true
 
   import { page } from '$app/stores';
-  import type { Config, MarkdownFile } from '$lib/stores/model';
+  import type { Config } from '$lib/stores/model';
+  import PageContent from '$lib/components/PageContent.svelte';
   import { appComponents } from '$lib/componentMaps';
-
-  import Markdoc from '$lib/components/Markdoc.svelte';
-
-  let content: MarkdownFile = $page.data.content;
   let config: Config = $page.data.config;
 </script>
 
@@ -20,4 +17,6 @@
   <svelte:component this={appComponents.Features} features={config.features} />
 {/if}
 
-<Markdoc {content} />
+<div class="p-4 max-w-4xl mx-auto">
+  <PageContent />
+</div>

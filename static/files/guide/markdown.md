@@ -1,12 +1,10 @@
 ---
-title: Zaui Markdown
+title: Markdown
 ---
 
 # Markdown
 
-This library uses [Markdoc](https://markdoc.dev/docs/syntax) which supports the [Commonmark](https://commonmark.org/) Markdown specification.
-
-Images can stored together with the markdown, and referenced using relative links.
+Zaui uses [Markdoc](https://markdoc.dev/docs/syntax) which supports the [Commonmark](https://commonmark.org/) markdown specification.
 
 See below for an example of rendered content. The source for this page can be viewed on [GitHub](https://github.com/zeroasiccorp/zaui/blob/main/static/files/guide/markdown.md?plain=1).
 
@@ -17,6 +15,8 @@ See below for an example of rendered content. The source for this page can be vi
 ##### Heading 5
 
 ### Image
+Images stored together with the markdown can be referenced using relative links.
+
 ![The Great Wave off Kanagawa - Hokusai, 1831](images/hokusai.jpg "By Katsushika Hokusai - Metropolitan Museum of Art: entry 45434, Public Domain, https://commons.wikimedia.org/w/index.php?curid=2798407")
 
 ### Bullet list

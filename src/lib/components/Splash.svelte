@@ -36,16 +36,16 @@
 
 {#if pg.splash}
   <div
-    class="bg-slate-400 text-center p-10 sm:p-20 text-slate-100 font-display font-extralight bg-cover"
+    class="bg-slate-400 text-center p-10 sm:p-20 text-slate-100 font-display font-extralight bg-cover bg-center"
     style={splash.image ? `background-image: url(${splashlink})`: ''}
   >
     <h1
       class="text-balance text-5xl sm:text-6xl md:text-7xl max-w-screen-xl mx-auto tracking-wide backdrop-blur-sm"
     >
-      {title}
+      {splash.title || ''}
     </h1>
     <p class="text-3xl sm:text-4xl max-w-screen-xl mx-auto leading-[1.5] backdrop-blur-sm mt-2">
-      {subtitle}
+      {splash.subtitle || ''}
     </p>
   </div>
 {/if}

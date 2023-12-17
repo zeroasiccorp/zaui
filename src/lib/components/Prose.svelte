@@ -12,6 +12,7 @@
   // https://tailwindcss.com/docs/typography-plugin#element-modifiers
   const PROSE = clsx(
     'prose prose-slate max-w-none dark:prose-invert dark:text-slate-200',
+    'prose-blockquote:font-normal prose-blockquote:not-italic before:prose-p:content-none after:prose-p:content-none',
     'prose-headings:font-display prose-headings:font-normal',
     'prose-a:font-normal prose-a:text-sky-600 prose-a:no-underline hover:prose-a:underline prose-a:dark:text-sky-400',
     'prose-li:my-1',

@@ -1,5 +1,5 @@
 ---
-title: Zaui Menus
+title: Menus
 ---
 
 # Menu configuration

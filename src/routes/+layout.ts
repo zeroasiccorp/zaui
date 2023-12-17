@@ -3,9 +3,9 @@ import { building } from '$app/environment';
 import { get } from 'svelte/store';
 import type { LoadEvent } from '@sveltejs/kit';
 import { loader } from '$lib/loader';
-import { model, type MarkdownFiles, type MarkdownFile } from '$lib/stores/model';
+import { model, compareMDFDates, type MarkdownFiles, type MarkdownFile } from '$lib/stores/model';
 import { formatDate } from '$lib/formatDate';
-import { layoutComponents, pathLayout } from '$lib/componentMaps';
+import { layoutComponents } from '$lib/componentMaps';
 import { PUBLIC_PRODUCTION } from '$env/static/public';
 
 import plimit from 'p-limit';
@@ -19,10 +19,20 @@ import appConfig from '$appconfig/app.config';
 
 export async function load(evt: LoadEvent) {
   let data: MarkdownFiles = get(model);
-  // data is undefined on first get()
-  // TODO: self-initialize model store
+
+  // naive data loader - fetches markdown files and re-renders on first load
+  // TODO: properly pre-render pages and lazy-load larger sites.
   if (!data) {
-    data = { files: [], config: {}, fileMap: {}, submenuMap: {}, sidebarMap: {}, status: '', appConfig };
+    data = {
+      files: [],
+      config: {},
+      fileMap: {},
+      dirMap: {},
+      submenuMap: {},
+      sidebarMap: {},
+      status: '',
+      appConfig,
+    };
     model.set(data);
     let tstart = Date.now();
 
@@ -38,12 +48,37 @@ export async function load(evt: LoadEvent) {
     data.files = files.files || [];
 
     if (files.files?.length) {
+      // fetch markdown files
       let loadlist = files.files.map((file) => limit(() => getMarkdown(file, evt)));
       let mdData = await Promise.all(loadlist);
+
+      // populate fileMap and dirMap
       let fileMap: { [key: string]: MarkdownFile } = {};
+      let dirMap: { [key: string]: MarkdownFile[] } = {};
       mdData.forEach((file) => {
         fileMap[file.filepath] = file;
+        let names = file.filepath.split('/');
+        if (names.length > 1) {
+          dirMap['/' + names[0]] = []; // e.g. dirMap['/blog'] = []
+        }
       });
+      // console.log('fileMap', Object.keys(fileMap));
+
+      // populate dirMap with sorted list of files, and next/prev links
+      Object.keys(dirMap).forEach((dir) => {
+        dirMap[dir] = mdData
+          .filter(
+            (f) => f.filepath.startsWith(dir.slice(1) + '/') && !f.filepath.endsWith('/index.md')
+          )
+          .sort(compareMDFDates);
+        let len = dirMap[dir].length;
+        for (let i = 0; i < len; i++) {
+          dirMap[dir][i].next = dirMap[dir][i + 1] || dirMap[dir][0];
+          dirMap[dir][i].prev = dirMap[dir][i - 1] || dirMap[dir][len - 1];
+        }
+      });
+
+      // extract config from index.md
       data.config = fileMap['index.md']?.frontmatter || {};
 
       // Preview mode is default, but can be overridden by setting PUBLIC_PRODUCTION
@@ -64,17 +99,47 @@ export async function load(evt: LoadEvent) {
           navlink.submenu.text ??= navlink.text;
           navlink.submenu.href ??= navlink.href;
           data.submenuMap[navlink.submenu.href] = navlink.submenu;
+          for (let i = 0; i < navlink.submenu.links?.length ?? 0; i++) {
+            let file = fileMap[(navlink.submenu.links[i].href?.slice(1) ?? '') + '.md'];
+            if (file) {
+              let nextlink = navlink.submenu.links[i + 1] || navlink.submenu.links[0];
+              let nextfile = fileMap[(nextlink?.href?.slice(1) ?? '') + '.md'];
+              if (nextfile) {
+                file.next = nextfile;
+                nextfile.prev = file;
+              }
+            }
+          }
         }
       });
 
+      // populate sidebarMap with next/prev links
       data.config.sidebars?.forEach((sidebar) => {
-          data.sidebarMap[sidebar.href] = sidebar;
+        data.sidebarMap[sidebar.href] = sidebar;
+        for (let i = 0; i < sidebar.sections?.length ?? 0; i++) {
+          for (let j = 0; j < sidebar.sections[i].links?.length ?? 0; j++) {
+            let file = fileMap[(sidebar.sections[i].links[j].href?.slice(1) ?? '') + '.md'];
+            if (file) {
+              let nextlink =
+                sidebar.sections[i].links[j + 1] ||
+                sidebar.sections[i + 1]?.links?.[0] ||
+                sidebar.sections[0]?.links?.[0];
+              let nextfile = fileMap[(nextlink?.href?.slice(1) ?? '') + '.md'];
+              if (nextfile) {
+                file.next = nextfile;
+                nextfile.prev = file;
+              }
+            }
+          }
+        }
       });
 
       data.config.usermenu ??= false;
       data.config.mobilemenu ??= true;
+      data.config.shownext ??= true;
 
       data.fileMap = fileMap;
+      data.dirMap = dirMap;
       data.status = `${new Date().toISOString()} loaded ${loadlist.length} files (${
         Date.now() - tstart
       } ms)`;
@@ -95,12 +160,22 @@ export async function load(evt: LoadEvent) {
 
   let content = data.fileMap[path + '.md'] || data.fileMap[path ? path + '/index.md' : 'index.md'];
   let sidebar = data.sidebarMap[pathprefix];
+  let dir = data.dirMap[pathprefix];
 
   let frontmatter = content?.frontmatter || {};
-  let layout = layoutComponents[frontmatter.layout] || pathLayout(path);
+
+  let layout =
+    layoutComponents[frontmatter.layout] ||
+    (!path && layoutComponents['LandingPage']) ||
+    (path === 'blog' && layoutComponents['Posts']) ||
+    (Object.keys(data.dirMap).includes('/' + path) && layoutComponents['PageList']) ||
+    ((dir || sidebar) && layoutComponents['Post']) ||
+    (path === '_debug' && layoutComponents['Debug']) ||
+    (path === '_icons' && layoutComponents['Icons']) ||
+    layoutComponents['Default'];
 
   // content may be undefined if there is no md file - see [...path]/page.ts
-  return { content, frontmatter, layout, sidebar, config: data.config };
+  return { content, frontmatter, layout, sidebar, dir, config: data.config };
 }
 
 async function getMarkdown(filepath: string, evt: LoadEvent, prefix = '/files/') {

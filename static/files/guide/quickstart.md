@@ -1,5 +1,5 @@
 ---
-title: Zaui Quickstart
+title: Quickstart
 ---
 
 # Quickstart

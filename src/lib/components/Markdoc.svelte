@@ -15,6 +15,7 @@
   import CopyPasteCodeBlock from '$lib/components/CopyPasteCodeBlock.svelte';
   import Table from '$lib/components/Table.svelte';
   import Embed from '$lib/components/Embed.svelte';
+  import BlockQuote from '$lib/components/BlockQuote.svelte';
   import { markdownComponents } from '$lib/componentMaps';
 
   import { afterUpdate } from 'svelte';
@@ -39,6 +40,7 @@
     Table,
     Embed,
     CopyPasteCodeBlock,
+    BlockQuote,
   };
 
   import yaml from 'js-yaml';
@@ -84,12 +86,37 @@
           return new Tag('Table', attributes, children);
         },
       },
+      blockquote: {
+        transform(node, config) {
+          // check for GFM alert
+          // https://github.com/orgs/community/discussions/16925
+          let line1 = node.children[0]?.children[0]?.children[0]?.attributes?.content ?? '';
+          let alert = line1.match(/^\[!((NOTE|TIP|IMPORTANT|CAUTION|WARNING)|([^\]]+))\]$/);
+          if (alert) {
+            // uppercase only the first letter to match GFM
+            let type = alert[2] ? alert[1].slice(0,1) + alert[2].slice(1).toLowerCase() : alert[3];
+            node.children[0].children[0].children.shift(); // remove alert
+            node.children[0].children[0].children.shift(); // remove whitespace
+            return new Tag(
+              'Callout',
+              {...node.transformAttributes(config), ...{type}},
+              node.transformChildren(config)
+            );
+          }
+          const attributes = node.transformAttributes(config);
+          const children = node.transformChildren(config);
+          return new Tag('BlockQuote', attributes, children);
+        },
+      },
     },
     tags: {
       embed: {
         render: 'Embed',
       },
       callout: {
+        attributes: {
+          type: { type: String },
+        },
         render: 'Callout',
       },
       command: {

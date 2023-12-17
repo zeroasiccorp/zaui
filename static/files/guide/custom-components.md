@@ -1,12 +1,12 @@
 ---
-title: Zaui Custom Components
+title: Custom Components
 ---
 
 # Custom configuration
 
 The `src` directory holds custom configuration and components as well as [static files](static-files).
 
-See [jldec.me](https://github.com/jldec/jldec.me/blob/main/src) for an example of a site with a custom components.
+See [jldec.me](https://github.com/jldec/jldec.me/) for an example of a site with a custom components.
 
 ## Custom Svelte Components
 Custom components can replace any of the following component types.
@@ -21,13 +21,10 @@ Custom components can replace any of the following component types.
 
 2. **layoutComponents**  
   Layout components are referenced by name using the `layout` property in a markdown page. You can replace the following existing layouts, or add your own:
+  - `PageList`
+  - `Post`
+  - `Posts`
   - `LandingPage`
-  - `Blog`
-  - `BlogPost`
-  - `Job`
-  - `Jobs`
-  - `Contact`
-  - `Newsletter`
   - `Team`
 
 3. **markdownComponents**  
@@ -35,16 +32,21 @@ Custom components can replace any of the following component types.
 
 4. **iconComponents**  
   Icon components are Svelte components which render svg. You can extend or replace these.
+  - `AlertCircle`
+  - `AlertOctagon`
+  - `AlertTriangle`
   - `ArrowLeft`
   - `GitHub`
   - `Home`
+  - `Info`
+  - `Lightbulb`
   - `LinkedIn`
   - `Menu`
+  - `MessageSquareWarning`
   - `User`
   - `UserCheck`
   - `Users`
-  - `X`  
-
+  - `X`
 
 ## app.config
 

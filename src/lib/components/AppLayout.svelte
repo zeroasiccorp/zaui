@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { assets } from '$app/paths';
   import { appComponents } from '$lib/componentMaps';
   import { fixlink } from '$lib/fixlink';
   import LoginDialog from '$lib/components/LoginDialog.svelte';
@@ -10,12 +9,11 @@
   // content may be undefined e.g. if this is a 404 page
   export let content: MarkdownFile;
   export let config: Config;
-
 </script>
 
 <svelte:head>
   <script src="/prism.js" defer></script>
-  <link rel="icon" href="{config?.favicon ? fixlink(config?.favicon) : assets + 'favicon.jpg' }" />
+  <link rel="icon" href="{config?.favicon ? fixlink(config?.favicon) : '/favicon.jpg' }" />
 </svelte:head>
 
 <LoginDialog {config} />
