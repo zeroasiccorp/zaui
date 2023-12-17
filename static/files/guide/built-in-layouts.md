@@ -1,5 +1,5 @@
 ---
-title: Zaui Built-in Layouts
+title: Built-in Layouts
 ---
 
 # Layouts
@@ -12,20 +12,19 @@ For other layouts such as views with specialized metadata, you can specify a `la
 ---
 title: Machine Learning Software Engineer
 date: 2023-08-07
-layout: Job
+layout: Post
 ---
 ```
 
 ## Built-in layouts
-- **Blog** - Blog post list - see [Blogging](blogging).
-- **BlogPost** - Single blog post page.
-- **Jobs** - Job postings list.
-- **Job** - Single job posting page.
+- **Default** - The Default page layout - renders only markdown.
+- **LandingPage** - Page with hero section and features section.
+- **PageList** - Simple list of pages showing titles.
+- **Posts** - Blog post list with bylines and excerpts - see [Blogging](blogging).
+- **Post** - Single blog post page.
 - **Team** - Team list with photos.
-- **LandingPage** - Hero and features
 
 ## Utility layouts
-- **Default** - The Default layout.
 - **Icons** - List of available icons.
 - **Debug** - A debug layout with configuration info for the current page.
 

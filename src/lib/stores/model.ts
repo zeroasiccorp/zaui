@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
 import type { LoadData } from '$lib/loader';
 import type { Node } from '@markdoc/markdoc';
-import type { F, S } from 'vitest/dist/reporters-5f784f42';
 
 export interface MarkdownFile extends LoadData {
   filepath: string;
@@ -9,6 +8,8 @@ export interface MarkdownFile extends LoadData {
   yamlError?: string;
   ast?: Node;
   byline?: string;
+  next?: MarkdownFile;
+  prev?: MarkdownFile;
 }
 
 export interface Navlink {
@@ -53,6 +54,7 @@ export interface Hero {
   text: string;
   tagline?: string;
   icon?: Icon | string;
+  actionlinks?: Array<Navlink>;
 }
 
 export interface Splash {
@@ -80,6 +82,7 @@ export interface Config {
   features?: Array<Navlink>;
   usermenu?: boolean; // default = false
   mobilemenu?: boolean; // default = true
+  shownext?: boolean; // default = true
   layout?: string;
   title?: string;
   splash?: Splash;
@@ -95,6 +98,7 @@ export type MarkdownFiles = {
   config: Config;
   files: Array<string>;
   fileMap: { [key: string]: MarkdownFile };
+  dirMap: { [key: string]: Array<MarkdownFile> };
   submenuMap: { [key: string]: Submenu };
   sidebarMap: { [key: string]: Sidebar };
   status: string;

@@ -1,5 +1,5 @@
 ---
-title: Zaui Install
+title: Install
 ---
 
 # Install

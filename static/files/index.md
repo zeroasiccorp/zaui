@@ -15,11 +15,11 @@ hero:
   text: SvelteKit powered static site generator
   tagline: Generate a website from markdown with minimal fuss.
   icon: 💥
-  actions:
+  actionlinks:
     - text: Quickstart
-      link: /guide/quickstart
+      href: /guide/quickstart
     - text: GitHub
-      link: https://github.com/zeroasiccorp/zaui
+      href: https://github.com/zeroasiccorp/zaui
 
 fullwidth: true
 
@@ -74,6 +74,8 @@ sidebars:
             href: /guide/install
           - text: Markdown
             href: /guide/markdown
+          - text: Markdown extensions
+            href: /guide/markdown-extensions
           - text: Menus
             href: /guide/menus
           - text: Sidebars

@@ -1,0 +1,17 @@
+<script lang="ts">
+  // https://lucide.dev/icons/info
+  let cls = '';
+  export { cls as class };
+</script>
+
+<svg
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentcolor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={cls}
+>
+  <circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" />
+</svg>

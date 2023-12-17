@@ -11,7 +11,7 @@
       href={feature.href}
       class="not-prose w-full sm:w-64 sm:min-h-[250px] border-2 border-transparent hover:border-sky-400 bg-slate-50 dark:bg-slate-700 rounded-lg shadow-md dark:shadow-slate-700 p-6 lg:p-6"
     >
-      <NavIcon icon={feature.icon} class="text-2xl" />
+      <NavIcon icon={feature.icon} textclass="text-2xl" />
       <h3 class="mt-2 font-semibold leading-tight">{feature.text}</h3>
       <div class="mt-4 leading-normal">{feature.details}</div>
     </a>

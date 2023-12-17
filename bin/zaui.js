@@ -63,7 +63,8 @@ if (
 // defaults to projectDir/content
 // override with ZAUI_CONTENT_DIR, resolved relative to projectDir
 let contentDir = path.resolve(projectDir, process.env.ZAUI_CONTENT_DIR ?? 'content');
-if (!fs.existsSync(contentDir)) {
+let contentDirExists = fs.existsSync(contentDir);
+if (!contentDirExists) {
   console.log(`No content directory found at ${contentDir} - using static files from package.`);
   contentDir = path.join(packageDir, 'static', 'files');
 }
@@ -72,24 +73,34 @@ if (!fs.existsSync(contentDir)) {
 let staticDir = fs.mkdtempSync(path.join(os.tmpdir(), 'zaui-'));
 // add staticDir/files
 fs.mkdirSync(path.join(staticDir, 'files'));
-// symlink contentDir/* into staticDir/files (not including dotted)
+// symlink contentDir/* into staticDir/files (not including dotted or static/*)
 // NOTE: users should be warned that the contentDir is included in the build.
-overlayStaticDir(contentDir, path.join(staticDir, 'files'));
-// overlay symlinks -> srcDir/static/*
+overlayStaticDir(contentDir, path.join(staticDir, 'files'), ['static']);
+
+// overlay staticDir -> contentDir/static/*
+if (contentDirExists) {
+  let contentStaticDir = path.join(contentDir, 'static');
+  if (fs.existsSync(contentStaticDir)) {
+    overlayStaticDir(contentStaticDir, staticDir);
+  }
+}
+
+// overlay staticDir -> srcDir/static/*
 if (srcDir) {
   let srcStaticDir = path.join(srcDir, 'static');
   if (fs.existsSync(srcStaticDir)) {
     overlayStaticDir(srcStaticDir, staticDir);
   }
 }
-// overlay symlinks -> packageDir/static/*
+
+// overlay staticDir -> packageDir/static/*
 overlayStaticDir(path.join(packageDir, 'static'), staticDir);
 
 // helper function to symlink files in targetDir into staticDir
-function overlayStaticDir(targetDir, staticDir) {
+function overlayStaticDir(targetDir, staticDir, excludeList = []) {
   if (fs.existsSync(targetDir)) {
     fs.readdirSync(targetDir)
-      .filter((file) => !file.startsWith('.')) // avoid hidden
+      .filter((file) => !(file.startsWith('.') || excludeList.includes(file)))
       .forEach((file) => {
         try {
           // don't overwrite existing files

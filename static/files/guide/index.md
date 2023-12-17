@@ -1,5 +1,5 @@
 ---
-title: Zaui Guide
+title: Guide
 layout: LandingPage
 fullwidth: true
 ---

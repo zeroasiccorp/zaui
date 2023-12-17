@@ -1,5 +1,5 @@
 ---
-title: Zaui Sidebars
+title: Sidebars
 ---
 
 # Sidebars

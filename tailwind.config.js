@@ -35,6 +35,7 @@ let config = {
 //       If not, we may need to merge in the other direction
 
 let srcDir = process.env.ZAUI_SRC_DIR;
+let contentDir = process.env.ZAUI_CONTENT_DIR;
 
 if (srcDir) {
   content.push(path.join(srcDir, '**/*.{html,js,svelte,ts}'));
@@ -45,6 +46,10 @@ if (srcDir) {
     let userConfig = require(configFile);
     config = { ...merge(config, userConfig), content };
   }
+}
+
+if (contentDir) {
+  content.push(path.join(contentDir, '**/*.md'));
 }
 
 module.exports = config;

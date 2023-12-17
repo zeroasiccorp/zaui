@@ -1,5 +1,5 @@
 ---
-title: Zaui Custom Tailwind CSS
+title: Custom Tailwind CSS
 ---
 
 # Custom Tailwind CSS
