@@ -117,7 +117,9 @@
   {#if submenuMap[pathprefix]}
     {@const submenu = submenuMap[pathprefix]}
     <div
-      class="h-8 hidden md:flex flex-row items-end flex-wrap pl-[14px] pr-2 gap-x-3 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black"
+      class={clsx((config.mobilemenu ? 'hidden md:flex' : 'flex'),
+        'flex-row items-end flex-wrap gap-1 pl-[14px] pr-2 pt-1 gap-x-3 bg-slate-50 border-b border-slate-200 dark:bg-slate-900 dark:text-slate-200 dark:border-black'
+      )}
     >
       <a
         href={submenu.href}
@@ -152,7 +154,7 @@
   {/if}
 </nav>
 
-{#if config.usermenu && showNav && navlinks?.length}
+{#if config.mobilemenu && showNav && navlinks?.length}
   <nav
     transition:slide
     class="flex flex-col font-display leading-8 bg-slate-50 dark:text-slate-200 dark:bg-slate-900"

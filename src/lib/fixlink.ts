@@ -8,6 +8,9 @@ export function fixlink(href:string, pageprefix:string = '', path:string = '') {
   // don't fix home link / or remote links or page-internal anchors
   if (href.match(/^\/$|^#|^https?:\/\/|^mailto:/i)) return href;
 
+  // links to /static/ live at the root
+  if (href.match(/^\/static\//)) return href.slice(7);
+
   // default to file links e.g. to fetch images
   let prefix = '/files';
 
