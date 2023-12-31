@@ -1,0 +1,4 @@
+{
+	"extends": "../node_modules/@zeroasic/zaui/tsconfig.json"
+}
+

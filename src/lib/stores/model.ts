@@ -54,7 +54,9 @@ export interface Hero {
   text: string;
   tagline?: string;
   icon?: Icon | string;
+  downicon?: Icon | string;
   actionlinks?: Array<Navlink>;
+  video?: string;
 }
 
 export interface Splash {
