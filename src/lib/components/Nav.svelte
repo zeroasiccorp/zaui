@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { icons } from '$lib/componentMaps';
-  import { clsx } from 'clsx';
+  import clsx from 'clsx';
 
   // menu
   import Open from '$lib/components/icons/Menu.svelte';

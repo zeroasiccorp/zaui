@@ -1,10 +1,11 @@
 <script lang="ts">
-  import clsx from "clsx";
+  import clsx from 'clsx';
   import type { MarkdownFile } from '$lib/stores/model';
   import { page } from '$app/stores';
 
   // content may be undefined e.g. if this is a 404 page
   export let content: MarkdownFile;
+  let config = $page.data.config;
 
   $: fullwidth = content?.frontmatter?.fullwidth;
   $: sidebar = $page.data.sidebar;
@@ -21,8 +22,8 @@
   );
 </script>
 
-<div class="{sidebar ? 'md:ml-60' : ''}">
-  <div class={clsx(fullwidth ? '' : 'px-4 max-w-4xl mx-auto pt-8')}>
+<div class={sidebar ? 'md:ml-60' : ''}>
+  <div class={clsx(fullwidth ? '' : 'px-4 max-w-4xl mx-auto', config.pagetop ?? 'pt-8')}>
     <div class={PROSE}>
       <slot />
     </div>
