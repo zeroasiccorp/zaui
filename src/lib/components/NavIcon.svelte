@@ -1,6 +1,5 @@
 <script lang="ts">
   import { icons } from '$lib/componentMaps';
-  import { clsx } from 'clsx';
   import { fixlink } from '$lib/fixlink';
 
   type Icon = {
