@@ -28,7 +28,7 @@ Custom components can replace any of the following component types.
   - `Team`
 
 3. **markdownComponents**  
-  Markdown components can be used from within markdown content. Detais coming soon.
+  Markdown components can be used from within markdown content. Details coming soon.
 
 4. **iconComponents**  
   Icon components are Svelte components which render svg. You can extend or replace these.
