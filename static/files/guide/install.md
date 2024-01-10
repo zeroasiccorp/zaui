@@ -10,8 +10,6 @@ Use npm, pnpm, or yarn. E.g.
 pnpm install -D @zeroasic/zaui
 ```
 
-Use -D for `devDependencies``.
-
 Redistributing zaui as a dependency for redistribution in another npm package is not currently supported - but could be in the future ;-)
 
 ## package.json
