@@ -4,8 +4,6 @@ title: Quickstart
 
 # Quickstart
 
-## Install
-
 The following should work in an empty or an existing project.
 
 1. `pnpm install -D @zeroasic/zaui`
